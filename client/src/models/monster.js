@@ -1,10 +1,17 @@
-var Monster = function(startX, startY) {
-  this.x = startX
-  this.y = startY
-  
-  this.reset = function(newX, newY){
-    this.x = newX
-    this.y = newY
+var Monster = function(worldDimensions) {
+  this.worldDimensions = worldDimensions
+  this.imageSize = 3
+
+  this.randomPos = function(position) {
+    return this.imageSize + (Math.random() * (position - (this.imageSize * 2)))
   }
+
+  this.setPosition = function(){
+    this.x = this.randomPos(worldDimensions.width)
+    this.y = this.randomPos(worldDimensions.height)
+  }
+
+  this.setPosition()
+ 
 }
 module.exports = Monster;

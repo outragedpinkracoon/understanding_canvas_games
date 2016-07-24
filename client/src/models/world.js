@@ -1,18 +1,9 @@
-var Hero = require('./hero')
-var Monster = require('./monster')
-
-var World = function(canvas){
-  this.canvas = canvas
+var World = function(hero, monster){
   this.imageSize = 32
-  this.hero = new Hero(canvas.width / 2, canvas.height / 2)
-
-  this.randomPos = function(canvasDimension) {
-    return this.imageSize + (Math.random() * (canvasDimension - (this.imageSize * 2)))
-  }
-
-  this.monster = new Monster(this.randomPos(canvas.width), this.randomPos(canvas.height))
-
   this.monstersCaught = 0
+
+  this.hero = hero
+  this.monster = monster
 
   this.update = function(keysDown) {
 
@@ -33,8 +24,8 @@ var World = function(canvas){
 
     if(hasCollided){
       this.monstersCaught++
-      this.hero.reset(this.canvas.width / 2, this.canvas.height / 2)
-      this.monster.reset(this.randomPos(this.canvas.width), this.randomPos(this.canvas.height))
+      this.hero.setPosition()
+      this.monster.setPosition()
     }
 
   }

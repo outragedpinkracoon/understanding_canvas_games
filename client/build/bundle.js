@@ -44,7 +44,8 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+	var Hero = __webpack_require__(1)
+	var Monster = __webpack_require__(8)
 	var Images = __webpack_require__(3)
 	var KeyboardEvents = __webpack_require__(4)
 	var Display = __webpack_require__(5)
@@ -62,7 +63,15 @@
 	
 	  var keysDown = new KeyboardEvents().keysDown
 	
-	  var world = new World(canvas)
+	  var worldDimensions = {
+	    width: canvas.width,
+	    height: canvas.height
+	  }
+	
+	  var monster = new Monster(worldDimensions)
+	  var hero = new Hero(worldDimensions)
+	
+	  var world = new World(hero, monster)
 	
 	  renderer = new Renderer(display, world, images, keysDown)
 	
@@ -78,10 +87,15 @@
 /* 1 */
 /***/ function(module, exports) {
 
-	var Hero = function(startX, startY) {
-	  this.speed = 4 //pixels per second
-	  this.x = startX
-	  this.y = startY
+	var Hero = function(worldDimensions) {
+	  this.speed = 4
+	
+	  this.setPosition = function(newX, newY){
+	    this.x = worldDimensions.width / 2
+	    this.y = worldDimensions.height / 2
+	  }
+	  
+	  this.setPosition()
 	
 	  this.moveUp = function(){
 	    this.y -= this.speed
@@ -96,10 +110,7 @@
 	    this.x += this.speed
 	  }
 	
-	  this.reset = function(newX, newY){
-	    this.x = newX
-	    this.y = newY
-	  }
+	
 	}
 	
 	module.exports = Hero
@@ -219,23 +230,14 @@
 
 /***/ },
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	var Hero = __webpack_require__(1)
-	var Monster = __webpack_require__(8)
-	
-	var World = function(canvas){
-	  this.canvas = canvas
+	var World = function(hero, monster){
 	  this.imageSize = 32
-	  this.hero = new Hero(canvas.width / 2, canvas.height / 2)
-	
-	  this.randomPos = function(canvasDimension) {
-	    return this.imageSize + (Math.random() * (canvasDimension - (this.imageSize * 2)))
-	  }
-	
-	  this.monster = new Monster(this.randomPos(canvas.width), this.randomPos(canvas.height))
-	
 	  this.monstersCaught = 0
+	
+	  this.hero = hero
+	  this.monster = monster
 	
 	  this.update = function(keysDown) {
 	
@@ -256,8 +258,8 @@
 	
 	    if(hasCollided){
 	      this.monstersCaught++
-	      this.hero.reset(this.canvas.width / 2, this.canvas.height / 2)
-	      this.monster.reset(this.randomPos(this.canvas.width), this.randomPos(this.canvas.height))
+	      this.hero.setPosition()
+	      this.monster.setPosition()
 	    }
 	
 	  }
@@ -276,14 +278,21 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	var Monster = function(startX, startY) {
-	  this.x = startX
-	  this.y = startY
-	  
-	  this.reset = function(newX, newY){
-	    this.x = newX
-	    this.y = newY
+	var Monster = function(worldDimensions) {
+	  this.worldDimensions = worldDimensions
+	  this.imageSize = 3
+	
+	  this.randomPos = function(position) {
+	    return this.imageSize + (Math.random() * (position - (this.imageSize * 2)))
 	  }
+	
+	  this.setPosition = function(){
+	    this.x = this.randomPos(worldDimensions.width)
+	    this.y = this.randomPos(worldDimensions.height)
+	  }
+	
+	  this.setPosition()
+	 
 	}
 	module.exports = Monster;
 

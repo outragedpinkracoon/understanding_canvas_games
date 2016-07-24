@@ -1,4 +1,5 @@
-
+var Hero = require('./models/hero')
+var Monster = require('./models/monster')
 var Images = require('./models/images')
 var KeyboardEvents = require('./models/keyboardEvents')
 var Display = require('./models/display')
@@ -16,7 +17,15 @@ window.onload = function () {
 
   var keysDown = new KeyboardEvents().keysDown
 
-  var world = new World(canvas)
+  var worldDimensions = {
+    width: canvas.width,
+    height: canvas.height
+  }
+
+  var monster = new Monster(worldDimensions)
+  var hero = new Hero(worldDimensions)
+
+  var world = new World(hero, monster)
 
   renderer = new Renderer(display, world, images, keysDown)
 
