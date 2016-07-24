@@ -1,19 +1,19 @@
 var Hero = function(startX, startY) {
-  this.speed = 256 //pixels per second
+  this.speed = 4 //pixels per second
   this.x = startX
   this.y = startY
 
-  this.moveUp = function(modifier){
-    this.y -= this.speed * modifier
+  this.moveUp = function(){
+    this.y -= this.speed
   }
-  this.moveDown = function(modifier){
-    this.y += this.speed * modifier
+  this.moveDown = function(){
+    this.y += this.speed
   }
-  this.moveLeft = function(modifier){
-    this.x -= this.speed * modifier
+  this.moveLeft = function(){
+    this.x -= this.speed
   }
-  this.moveRight = function(modifier){
-    this.x += this.speed * modifier
+  this.moveRight = function(){
+    this.x += this.speed
   }
 }
 

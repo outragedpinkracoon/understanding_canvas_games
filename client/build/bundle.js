@@ -63,7 +63,7 @@
 	
 	  var draw = function() {
 	    ctx.clearRect(0, 0, canvas.width, canvas.height);
-	    updateHero(hero,keysDown, 0.02)
+	    updateHero(hero,keysDown)
 	    ctx.drawImage(bgImage, 0, 0)
 	    ctx.drawImage(heroImage, hero.x, hero.y)
 	    requestAnimationFrame(draw);
@@ -73,19 +73,19 @@
 	  
 	}
 	
-	function updateHero(hero, keysDown, modifier) {
+	function updateHero(hero, keysDown) {
 	  
 	  if (38 in keysDown) { //up
-	    hero.moveUp(modifier)
+	    hero.moveUp()
 	  }
 	  if (40 in keysDown) { //down
-	    hero.moveDown(modifier)
+	    hero.moveDown()
 	  }
 	  if (37 in keysDown) { //left
-	    hero.moveLeft(modifier)
+	    hero.moveLeft()
 	  }
 	  if (39 in keysDown) { //right
-	    hero.moveRight(modifier)
+	    hero.moveRight()
 	  }
 	}
 	
@@ -130,21 +130,21 @@
 /***/ function(module, exports) {
 
 	var Hero = function(startX, startY) {
-	  this.speed = 256 //pixels per second
+	  this.speed = 4 //pixels per second
 	  this.x = startX
 	  this.y = startY
 	
-	  this.moveUp = function(modifier){
-	    this.y -= this.speed * modifier
+	  this.moveUp = function(){
+	    this.y -= this.speed
 	  }
-	  this.moveDown = function(modifier){
-	    this.y += this.speed * modifier
+	  this.moveDown = function(){
+	    this.y += this.speed
 	  }
-	  this.moveLeft = function(modifier){
-	    this.x -= this.speed * modifier
+	  this.moveLeft = function(){
+	    this.x -= this.speed
 	  }
-	  this.moveRight = function(modifier){
-	    this.x += this.speed * modifier
+	  this.moveRight = function(){
+	    this.x += this.speed
 	  }
 	}
 	
