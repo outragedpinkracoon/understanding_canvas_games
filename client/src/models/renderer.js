@@ -4,6 +4,7 @@ var Renderer = function(display, world, images, keysDown){
   this.world = world
   this.images = images
   this.keysDown = keysDown
+  this.imageSize = 32
 
   this.draw = function() {
     this.clearCanvas()
@@ -11,9 +12,19 @@ var Renderer = function(display, world, images, keysDown){
     this.world.update(this.keysDown)
     this.drawImages()
 
+    this.drawMonsterCaughtCount()
+
     requestAnimationFrame(function(){
       this.draw()
     }.bind(this))
+  }
+
+  this.drawMonsterCaughtCount = function(){
+    this.ctx.fillStyle = "rgb(250, 250, 250)"
+    this.ctx.font = "24px Helvetica"
+    this.ctx.textAlign = "left"
+    this.ctx.textBaseline = "top"
+    this.ctx.fillText("Monsters caught: " + world.monstersCaught, this.imageSize, this.imageSize)
   }
 
   this.drawImages = function(){
