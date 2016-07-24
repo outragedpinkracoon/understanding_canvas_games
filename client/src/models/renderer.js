@@ -1,15 +1,14 @@
-var Renderer = function(display, world, images, keysDown){
+var Renderer = function(display, world, images){
   this.canvas = display.canvas
   this.ctx = display.ctx
   this.world = world
   this.images = images
-  this.keysDown = keysDown
   this.imageSize = 32
 
   this.draw = function() {
     this.clearCanvas()
 
-    this.world.update(this.keysDown)
+    this.world.update()
     this.drawImages()
 
     this.drawMonsterCaughtCount()

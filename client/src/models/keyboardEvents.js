@@ -1,12 +1,12 @@
 var KeyboardEvents = function(){
-  this.keysDown = {}
+  this.keyPressTracker = {}
 
   addEventListener("keydown", function (e) {
-    this.keysDown[e.keyCode] = true
+    this.keyPressTracker[e.keyCode] = true
   }.bind(this), false)
 
   addEventListener("keyup", function (e) {
-    delete this.keysDown[e.keyCode]
+    delete this.keyPressTracker[e.keyCode]
   }.bind(this), false)
 }
 module.exports = KeyboardEvents

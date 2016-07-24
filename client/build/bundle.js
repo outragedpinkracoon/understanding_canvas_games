@@ -61,7 +61,7 @@
 	  var ctx = display.ctx
 	  var images = new Images();
 	
-	  var keysDown = new KeyboardEvents().keysDown
+	  var keyPressTracker = new KeyboardEvents().keyPressTracker
 	
 	  var worldDimensions = {
 	    width: canvas.width,
@@ -71,9 +71,9 @@
 	  var monster = new Monster(worldDimensions)
 	  var hero = new Hero(worldDimensions)
 	
-	  var world = new World(hero, monster)
+	  var world = new World(hero, monster, keyPressTracker)
 	
-	  renderer = new Renderer(display, world, images, keysDown)
+	  renderer = new Renderer(display, world, images)
 	
 	  renderer.draw()
 	  
@@ -169,14 +169,14 @@
 /***/ function(module, exports) {
 
 	var KeyboardEvents = function(){
-	  this.keysDown = {}
+	  this.keyPressTracker = {}
 	
 	  addEventListener("keydown", function (e) {
-	    this.keysDown[e.keyCode] = true
+	    this.keyPressTracker[e.keyCode] = true
 	  }.bind(this), false)
 	
 	  addEventListener("keyup", function (e) {
-	    delete this.keysDown[e.keyCode]
+	    delete this.keyPressTracker[e.keyCode]
 	  }.bind(this), false)
 	}
 	module.exports = KeyboardEvents
@@ -199,18 +199,17 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	var Renderer = function(display, world, images, keysDown){
+	var Renderer = function(display, world, images){
 	  this.canvas = display.canvas
 	  this.ctx = display.ctx
 	  this.world = world
 	  this.images = images
-	  this.keysDown = keysDown
 	  this.imageSize = 32
 	
 	  this.draw = function() {
 	    this.clearCanvas()
 	
-	    this.world.update(this.keysDown)
+	    this.world.update()
 	    this.drawImages()
 	
 	    this.drawMonsterCaughtCount()
@@ -243,25 +242,26 @@
 /* 7 */
 /***/ function(module, exports) {
 
-	var World = function(hero, monster){
+	var World = function(hero, monster, keyPressTracker){
 	  this.imageSize = 32
 	  this.monstersCaught = 0
+	  this.keyPressTracker = keyPressTracker
 	
 	  this.hero = hero
 	  this.monster = monster
 	
-	  this.update = function(keysDown) {
+	  this.update = function() {
 	
-	    if (38 in keysDown) { //up
+	    if (38 in this.keyPressTracker) { //up
 	      this.hero.moveUp()
 	    }
-	    if (40 in keysDown) { //down
+	    if (40 in this.keyPressTracker) { //down
 	      this.hero.moveDown()
 	    }
-	    if (37 in keysDown) { //left
+	    if (37 in this.keyPressTracker) { //left
 	      this.hero.moveLeft()
 	    }
-	    if (39 in keysDown) { //right
+	    if (39 in this.keyPressTracker) { //right
 	      this.hero.moveRight()
 	    }
 	

@@ -1,22 +1,23 @@
-var World = function(hero, monster){
+var World = function(hero, monster, keyPressTracker){
   this.imageSize = 32
   this.monstersCaught = 0
+  this.keyPressTracker = keyPressTracker
 
   this.hero = hero
   this.monster = monster
 
-  this.update = function(keysDown) {
+  this.update = function() {
 
-    if (38 in keysDown) { //up
+    if (38 in this.keyPressTracker) { //up
       this.hero.moveUp()
     }
-    if (40 in keysDown) { //down
+    if (40 in this.keyPressTracker) { //down
       this.hero.moveDown()
     }
-    if (37 in keysDown) { //left
+    if (37 in this.keyPressTracker) { //left
       this.hero.moveLeft()
     }
-    if (39 in keysDown) { //right
+    if (39 in this.keyPressTracker) { //right
       this.hero.moveRight()
     }
 

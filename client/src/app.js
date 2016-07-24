@@ -15,7 +15,7 @@ window.onload = function () {
   var ctx = display.ctx
   var images = new Images();
 
-  var keysDown = new KeyboardEvents().keysDown
+  var keyPressTracker = new KeyboardEvents().keyPressTracker
 
   var worldDimensions = {
     width: canvas.width,
@@ -25,9 +25,9 @@ window.onload = function () {
   var monster = new Monster(worldDimensions)
   var hero = new Hero(worldDimensions)
 
-  var world = new World(hero, monster)
+  var world = new World(hero, monster, keyPressTracker)
 
-  renderer = new Renderer(display, world, images, keysDown)
+  renderer = new Renderer(display, world, images)
 
   renderer.draw()
   
