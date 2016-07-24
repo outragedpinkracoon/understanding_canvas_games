@@ -245,9 +245,11 @@
 	
 	  this.hero = hero
 	  this.monster = monster
+	}
 	
-	  this.update = function() {
+	World.prototype = {
 	
+	  update: function() {
 	    if (38 in this.keyPressTracker) { //up
 	      this.hero.moveUp()
 	    }
@@ -269,9 +271,8 @@
 	      this.monster.setPosition()
 	    }
 	
-	  }
-	
-	  this.collisionTest = function(object1, object2) {
+	  },
+	  collisionTest:function(object1, object2) {
 	    return object1.x <= (object2.x + this.imageSize)
 	    && object2.x <= (object1.x + this.imageSize)
 	    && object1.y <= (object2.y + this.imageSize)
