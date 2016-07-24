@@ -8,7 +8,6 @@ var World = function(hero, monster, keyPressTracker){
 }
 
 World.prototype = {
-
   update: function() {
     if (38 in this.keyPressTracker) { //up
       this.hero.moveUp()

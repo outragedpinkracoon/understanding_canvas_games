@@ -4,8 +4,10 @@ var Renderer = function(display, world, images){
   this.world = world
   this.images = images
   this.imageSize = 32
+}
 
-  this.draw = function() {
+Renderer.prototype = {
+  draw: function() {
     this.clearCanvas()
 
     this.world.update()
@@ -16,23 +18,22 @@ var Renderer = function(display, world, images){
     requestAnimationFrame(function(){
       this.draw()
     }.bind(this))
-  }
-
-  this.drawMonsterCaughtCount = function(){
+  },
+  drawMonsterCaughtCount: function(){
     this.ctx.fillStyle = "rgb(250, 250, 250)"
     this.ctx.font = "24px Helvetica"
     this.ctx.textAlign = "left"
     this.ctx.textBaseline = "top"
-    this.ctx.fillText("Monsters caught: " + world.monstersCaught, this.imageSize, this.imageSize)
-  }
-
-  this.drawImages = function(){
-    this.ctx.drawImage(images.background, 0, 0)
-    this.ctx.drawImage(images.hero, this.world.hero.x, this.world.hero.y)
-    this.ctx.drawImage(images.monster, this.world.monster.x, this.world.monster.y)
-  }
-  this.clearCanvas = function(){
+    this.ctx.fillText("Monsters caught: " + this.world.monstersCaught, this.imageSize, this.imageSize)
+  },
+  drawImages: function(){
+    this.ctx.drawImage(this.images.background, 0, 0)
+    this.ctx.drawImage(this.images.hero, this.world.hero.x, this.world.hero.y)
+    this.ctx.drawImage(this.images.monster, this.world.monster.x, this.world.monster.y)
+  },
+  clearCanvas: function(){
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
   }
 }
+
 module.exports = Renderer
