@@ -1,0 +1,1 @@
+Refactoring the tutorial from http://www.lostdecadegames.com/demos/simple_canvas_game/ to learn some bits and bobs about the canvas.
