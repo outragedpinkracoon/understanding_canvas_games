@@ -72,7 +72,6 @@
 	  var hero = new Hero(worldDimensions)
 	
 	  var world = new World(hero, monster, keyPressTracker)
-	
 	  renderer = new Renderer(display, world, images)
 	
 	  renderer.draw()
