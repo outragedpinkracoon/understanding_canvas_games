@@ -1,14 +1,16 @@
 var Images = function(){
+  this.background = this.addImage("images/background.png")
+  this.hero = this.addImage("images/hero.png")
+  this.monster = this.addImage("images/monster.png")
 
-  function addImage (path) {
+}
+
+Images.prototype = {
+  addImage: function(path) {
     var image = new Image()
     image.src = path
     return image
   }
-
-  this.background = addImage("images/background.png")
-  this.hero = addImage("images/hero.png")
-  this.monster = addImage("images/monster.png")
-
 }
+
 module.exports = Images

@@ -45,14 +45,14 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var Hero = __webpack_require__(1)
-	var Monster = __webpack_require__(8)
+	var Monster = __webpack_require__(2)
 	var Images = __webpack_require__(3)
 	var KeyboardEvents = __webpack_require__(4)
 	var Display = __webpack_require__(5)
 	var Renderer = __webpack_require__(6)
 	var World = __webpack_require__(7)
 	
-	__webpack_require__(2)
+	__webpack_require__(8)
 	
 	window.onload = function () {
 	
@@ -89,28 +89,27 @@
 
 	var Hero = function(worldDimensions) {
 	  this.speed = 4
-	
-	  this.setPosition = function(newX, newY){
-	    this.x = worldDimensions.width / 2
-	    this.y = worldDimensions.height / 2
-	  }
-	  
+	  this.worldDimensions = worldDimensions
 	  this.setPosition()
+	}
 	
-	  this.moveUp = function(){
-	    this.y -= this.speed
-	  }
-	  this.moveDown = function(){
+	Hero.prototype = {
+	  moveUp: function(){
+	      this.y -= this.speed
+	  },
+	  moveDown: function(){
 	    this.y += this.speed
-	  }
-	  this.moveLeft = function(){
+	  },
+	  moveLeft: function(){
 	    this.x -= this.speed
-	  }
-	  this.moveRight = function(){
+	  },
+	  moveRight: function(){
 	    this.x += this.speed
+	  },
+	  setPosition: function(){
+	    this.x = this.worldDimensions.width / 2
+	    this.y = this.worldDimensions.height / 2
 	  }
-	
-	
 	}
 	
 	module.exports = Hero
@@ -119,48 +118,43 @@
 /* 2 */
 /***/ function(module, exports) {
 
-	(function() {
-	    var lastTime = 0;
-	    var vendors = ['ms', 'moz', 'webkit', 'o'];
-	    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-	        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-	        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
-	                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
-	    }
+	var Monster = function(worldDimensions) {
+	  this.worldDimensions = worldDimensions
+	  this.imageSize = 3
+	
+	  this.randomPos = function(position) {
+	    return this.imageSize + (Math.random() * (position - (this.imageSize * 2)))
+	  }
+	
+	  this.setPosition = function(){
+	    this.x = this.randomPos(worldDimensions.width)
+	    this.y = this.randomPos(worldDimensions.height)
+	  }
+	
+	  this.setPosition()
 	 
-	    if (!window.requestAnimationFrame)
-	        window.requestAnimationFrame = function(callback, element) {
-	            var currTime = new Date().getTime();
-	            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-	            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-	              timeToCall);
-	            lastTime = currTime + timeToCall;
-	            return id;
-	        };
-	 
-	    if (!window.cancelAnimationFrame)
-	        window.cancelAnimationFrame = function(id) {
-	            clearTimeout(id);
-	        };
-	}());
+	}
+	module.exports = Monster;
 
 /***/ },
 /* 3 */
 /***/ function(module, exports) {
 
 	var Images = function(){
+	  this.background = this.addImage("images/background.png")
+	  this.hero = this.addImage("images/hero.png")
+	  this.monster = this.addImage("images/monster.png")
 	
-	  function addImage (path) {
+	}
+	
+	Images.prototype = {
+	  addImage: function(path) {
 	    var image = new Image()
 	    image.src = path
 	    return image
 	  }
-	
-	  this.background = addImage("images/background.png")
-	  this.hero = addImage("images/hero.png")
-	  this.monster = addImage("images/monster.png")
-	
 	}
+	
 	module.exports = Images
 
 
@@ -289,23 +283,30 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	var Monster = function(worldDimensions) {
-	  this.worldDimensions = worldDimensions
-	  this.imageSize = 3
-	
-	  this.randomPos = function(position) {
-	    return this.imageSize + (Math.random() * (position - (this.imageSize * 2)))
-	  }
-	
-	  this.setPosition = function(){
-	    this.x = this.randomPos(worldDimensions.width)
-	    this.y = this.randomPos(worldDimensions.height)
-	  }
-	
-	  this.setPosition()
+	(function() {
+	    var lastTime = 0;
+	    var vendors = ['ms', 'moz', 'webkit', 'o'];
+	    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+	        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+	        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
+	                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
+	    }
 	 
-	}
-	module.exports = Monster;
+	    if (!window.requestAnimationFrame)
+	        window.requestAnimationFrame = function(callback, element) {
+	            var currTime = new Date().getTime();
+	            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+	            var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+	              timeToCall);
+	            lastTime = currTime + timeToCall;
+	            return id;
+	        };
+	 
+	    if (!window.cancelAnimationFrame)
+	        window.cancelAnimationFrame = function(id) {
+	            clearTimeout(id);
+	        };
+	}());
 
 /***/ }
 /******/ ]);

@@ -1,27 +1,26 @@
 var Hero = function(worldDimensions) {
   this.speed = 4
-
-  this.setPosition = function(newX, newY){
-    this.x = worldDimensions.width / 2
-    this.y = worldDimensions.height / 2
-  }
-  
+  this.worldDimensions = worldDimensions
   this.setPosition()
+}
 
-  this.moveUp = function(){
-    this.y -= this.speed
-  }
-  this.moveDown = function(){
+Hero.prototype = {
+  moveUp: function(){
+      this.y -= this.speed
+  },
+  moveDown: function(){
     this.y += this.speed
-  }
-  this.moveLeft = function(){
+  },
+  moveLeft: function(){
     this.x -= this.speed
-  }
-  this.moveRight = function(){
+  },
+  moveRight: function(){
     this.x += this.speed
+  },
+  setPosition: function(){
+    this.x = this.worldDimensions.width / 2
+    this.y = this.worldDimensions.height / 2
   }
-
-
 }
 
 module.exports = Hero
