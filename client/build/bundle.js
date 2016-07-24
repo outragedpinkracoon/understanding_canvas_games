@@ -194,14 +194,22 @@
 	  this.keysDown = keysDown
 	
 	  this.draw = function() {
-	    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-	    this.world.update(this.keysDown)
+	    this.clearCanvas()
 	
-	    this.ctx.drawImage(images.background, 0, 0)
-	    this.ctx.drawImage(images.hero, world.hero.x, world.hero.y)
+	    this.world.update(this.keysDown)
+	    this.drawImages()
+	
 	    requestAnimationFrame(function(){
 	      this.draw()
-	    }.bind(this));
+	    }.bind(this))
+	  }
+	
+	  this.drawImages = function(){
+	    this.ctx.drawImage(images.background, 0, 0)
+	    this.ctx.drawImage(images.hero, this.world.hero.x, this.world.hero.y)
+	  }
+	  this.clearCanvas = function(){
+	    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 	  }
 	}
 	module.exports = Renderer
