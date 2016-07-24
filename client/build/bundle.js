@@ -45,82 +45,31 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var Hero = __webpack_require__(1)
+	var Images = __webpack_require__(3)
+	var KeyboardEvents = __webpack_require__(4)
+	var Display = __webpack_require__(5)
+	var Renderer = __webpack_require__(6)
+	
 	__webpack_require__(2)
 	
 	window.onload = function () {
 	
-	  var display = createCanvas()
-	
+	  var display = new Display()
 	  var canvas = display.canvas
 	  var ctx = display.ctx
 	
 	  var hero = new Hero(canvas.width / 2, canvas.height / 2)
 	
-	  var bgImage = makeImage("images/background.png")
-	  var heroImage = makeImage("images/hero.png")
+	  images = new Images();
 	
-	  keysDown = keyboardEvents(hero)
+	  keysDown = new KeyboardEvents().keysDown
 	
-	  var draw = function() {
-	    ctx.clearRect(0, 0, canvas.width, canvas.height);
-	    updateHero(hero,keysDown)
-	    ctx.drawImage(bgImage, 0, 0)
-	    ctx.drawImage(heroImage, hero.x, hero.y)
-	    requestAnimationFrame(draw);
-	  }
+	  renderer = new Renderer(display, hero, images, keysDown)
 	
-	  draw()
+	  renderer.draw()
 	  
 	}
 	
-	function updateHero(hero, keysDown) {
-	  
-	  if (38 in keysDown) { //up
-	    hero.moveUp()
-	  }
-	  if (40 in keysDown) { //down
-	    hero.moveDown()
-	  }
-	  if (37 in keysDown) { //left
-	    hero.moveLeft()
-	  }
-	  if (39 in keysDown) { //right
-	    hero.moveRight()
-	  }
-	}
-	
-	function createCanvas(){
-	  var canvas = document.createElement("canvas")
-	  var ctx = canvas.getContext("2d")
-	  canvas.width = 512
-	  canvas.height = 480
-	  document.body.appendChild(canvas)
-	  return {
-	    ctx: ctx,
-	    canvas: canvas
-	  }
-	}
-	
-	function makeImage (path, callback) {
-	  var image = new Image()
-	  image.src = path
-	  image.onload = callback
-	  return image
-	}
-	
-	function keyboardEvents(hero){
-	  keysDown ={}
-	
-	  addEventListener("keydown", function (e) {
-	    keysDown[e.keyCode] = true
-	  }, false)
-	
-	   addEventListener("keyup", function (e) {
-	    delete this.keysDown[e.keyCode]
-	  }, false)
-	
-	  return keysDown
-	}
 	
 	
 
@@ -178,6 +127,97 @@
 	            clearTimeout(id);
 	        };
 	}());
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	var Images = function(){
+	
+	  function addImage (path) {
+	    var image = new Image()
+	    image.src = path
+	    return image
+	  }
+	
+	  this.background = addImage("images/background.png")
+	  this.hero = addImage("images/hero.png")
+	  this.monster = addImage("images/monster.png")
+	
+	}
+	module.exports = Images
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	var KeyboardEvents = function(){
+	  this.keysDown = {}
+	
+	  addEventListener("keydown", function (e) {
+	    this.keysDown[e.keyCode] = true
+	  }.bind(this), false)
+	
+	  addEventListener("keyup", function (e) {
+	    delete this.keysDown[e.keyCode]
+	  }.bind(this), false)
+	}
+	module.exports = KeyboardEvents
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	var Display = function(){
+	  this.canvas = document.createElement("canvas")
+	  this.ctx = this.canvas.getContext("2d")
+	  this.canvas.width = 512
+	  this.canvas.height = 480
+	  document.body.appendChild(this.canvas)
+	}
+	module.exports = Display
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	var Renderer = function(display, hero, images, keysDown){
+	  this.canvas = display.canvas
+	  this.ctx = display.ctx
+	  this.hero = hero
+	  this.images = images
+	  this.keysDown = keysDown
+	
+	  this.draw = function() {
+	    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	    this.updateHero(this.hero,this.keysDown)
+	
+	    this.ctx.drawImage(images.background, 0, 0)
+	    this.ctx.drawImage(images.hero, hero.x, hero.y)
+	    requestAnimationFrame(function(){
+	      this.draw()
+	    }.bind(this));
+	  }
+	
+	  this.updateHero = function() {
+	    
+	    if (38 in this.keysDown) { //up
+	      this.hero.moveUp()
+	    }
+	    if (40 in keysDown) { //down
+	      this.hero.moveDown()
+	    }
+	    if (37 in keysDown) { //left
+	      this.hero.moveLeft()
+	    }
+	    if (39 in keysDown) { //right
+	      this.hero.moveRight()
+	    }
+	  }
+	}
+	module.exports = Renderer
 
 /***/ }
 /******/ ]);
