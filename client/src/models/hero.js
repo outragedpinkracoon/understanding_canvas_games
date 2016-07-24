@@ -15,6 +15,11 @@ var Hero = function(startX, startY) {
   this.moveRight = function(){
     this.x += this.speed
   }
+
+  this.reset = function(newX, newY){
+    this.x = newX
+    this.y = newY
+  }
 }
 
 module.exports = Hero

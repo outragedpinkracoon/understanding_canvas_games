@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Hero = __webpack_require__(1)
+	
 	var Images = __webpack_require__(3)
 	var KeyboardEvents = __webpack_require__(4)
 	var Display = __webpack_require__(5)
@@ -58,14 +58,11 @@
 	  var display = new Display()
 	  var canvas = display.canvas
 	  var ctx = display.ctx
-	
-	  var hero = new Hero(canvas.width / 2, canvas.height / 2)
-	
 	  var images = new Images();
 	
 	  var keysDown = new KeyboardEvents().keysDown
 	
-	  var world = new World(hero)
+	  var world = new World(canvas)
 	
 	  renderer = new Renderer(display, world, images, keysDown)
 	
@@ -97,6 +94,11 @@
 	  }
 	  this.moveRight = function(){
 	    this.x += this.speed
+	  }
+	
+	  this.reset = function(newX, newY){
+	    this.x = newX
+	    this.y = newY
 	  }
 	}
 	
@@ -207,6 +209,7 @@
 	  this.drawImages = function(){
 	    this.ctx.drawImage(images.background, 0, 0)
 	    this.ctx.drawImage(images.hero, this.world.hero.x, this.world.hero.y)
+	    this.ctx.drawImage(images.monster, this.world.monster.x, this.world.monster.y)
 	  }
 	  this.clearCanvas = function(){
 	    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
@@ -216,12 +219,26 @@
 
 /***/ },
 /* 7 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	var World = function(hero, keysDown){
-	  this.hero = hero
+	var Hero = __webpack_require__(1)
+	var Monster = __webpack_require__(8)
+	
+	var World = function(canvas){
+	  this.canvas = canvas
+	  this.imageSize = 32
+	  this.hero = new Hero(canvas.width / 2, canvas.height / 2)
+	
+	  this.randomPos = function(canvasDimension) {
+	    return this.imageSize + (Math.random() * (canvasDimension - (this.imageSize * 2)))
+	  }
+	
+	  this.monster = new Monster(this.randomPos(canvas.width), this.randomPos(canvas.height))
+	
+	  this.monstersCaught = 0
 	
 	  this.update = function(keysDown) {
+	
 	    if (38 in keysDown) { //up
 	      this.hero.moveUp()
 	    }
@@ -234,10 +251,41 @@
 	    if (39 in keysDown) { //right
 	      this.hero.moveRight()
 	    }
+	
+	    var hasCollided = this.collisionTest(this.hero, this.monster)
+	
+	    if(hasCollided){
+	      this.monstersCaught++
+	      this.hero.reset(this.canvas.width / 2, this.canvas.height / 2)
+	      this.monster.reset(this.randomPos(this.canvas.width), this.randomPos(this.canvas.height))
+	    }
+	
+	  }
+	
+	  this.collisionTest = function(object1, object2) {
+	    return object1.x <= (object2.x + this.imageSize)
+	    && object2.x <= (object1.x + this.imageSize)
+	    && object1.y <= (object2.y + this.imageSize)
+	    && object2.y <= (object1.y + this.imageSize)
 	  }
 	}
 	
 	module.exports = World
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	var Monster = function(startX, startY) {
+	  this.x = startX
+	  this.y = startY
+	  
+	  this.reset = function(newX, newY){
+	    this.x = newX
+	    this.y = newY
+	  }
+	}
+	module.exports = Monster;
 
 /***/ }
 /******/ ]);
