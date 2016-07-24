@@ -49,6 +49,7 @@
 	var KeyboardEvents = __webpack_require__(4)
 	var Display = __webpack_require__(5)
 	var Renderer = __webpack_require__(6)
+	var World = __webpack_require__(7)
 	
 	__webpack_require__(2)
 	
@@ -60,11 +61,13 @@
 	
 	  var hero = new Hero(canvas.width / 2, canvas.height / 2)
 	
-	  images = new Images();
+	  var images = new Images();
 	
-	  keysDown = new KeyboardEvents().keysDown
+	  var keysDown = new KeyboardEvents().keysDown
 	
-	  renderer = new Renderer(display, hero, images, keysDown)
+	  var world = new World(hero)
+	
+	  renderer = new Renderer(display, world, images, keysDown)
 	
 	  renderer.draw()
 	  
@@ -183,27 +186,35 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	var Renderer = function(display, hero, images, keysDown){
+	var Renderer = function(display, world, images, keysDown){
 	  this.canvas = display.canvas
 	  this.ctx = display.ctx
-	  this.hero = hero
+	  this.world = world
 	  this.images = images
 	  this.keysDown = keysDown
 	
 	  this.draw = function() {
 	    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-	    this.updateHero(this.hero,this.keysDown)
+	    this.world.update(this.keysDown)
 	
 	    this.ctx.drawImage(images.background, 0, 0)
-	    this.ctx.drawImage(images.hero, hero.x, hero.y)
+	    this.ctx.drawImage(images.hero, world.hero.x, world.hero.y)
 	    requestAnimationFrame(function(){
 	      this.draw()
 	    }.bind(this));
 	  }
+	}
+	module.exports = Renderer
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	var World = function(hero, keysDown){
+	  this.hero = hero
 	
-	  this.updateHero = function() {
-	    
-	    if (38 in this.keysDown) { //up
+	  this.update = function(keysDown) {
+	    if (38 in keysDown) { //up
 	      this.hero.moveUp()
 	    }
 	    if (40 in keysDown) { //down
@@ -217,7 +228,8 @@
 	    }
 	  }
 	}
-	module.exports = Renderer
+	
+	module.exports = World
 
 /***/ }
 /******/ ]);

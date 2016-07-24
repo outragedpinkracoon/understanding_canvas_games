@@ -3,6 +3,7 @@ var Images = require('./models/images')
 var KeyboardEvents = require('./models/keyboardEvents')
 var Display = require('./models/display')
 var Renderer = require('./models/renderer')
+var World = require('./models/world')
 
 require('./requestAnimationShim')
 
@@ -14,11 +15,13 @@ window.onload = function () {
 
   var hero = new Hero(canvas.width / 2, canvas.height / 2)
 
-  images = new Images();
+  var images = new Images();
 
-  keysDown = new KeyboardEvents().keysDown
+  var keysDown = new KeyboardEvents().keysDown
 
-  renderer = new Renderer(display, hero, images, keysDown)
+  var world = new World(hero)
+
+  renderer = new Renderer(display, world, images, keysDown)
 
   renderer.draw()
   
