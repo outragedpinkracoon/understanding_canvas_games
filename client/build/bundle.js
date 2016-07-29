@@ -71,7 +71,7 @@
 	  var animal = new Animal(worldDimensions)
 	  var hero = new Farmer(worldDimensions)
 	
-	  var world = new World(hero, [animal], keyPressTracker)
+	  var world = new World(hero, [animal], keyPressTracker, worldDimensions)
 	  renderer = new Renderer(display, world, images)
 	
 	  renderer.draw()
@@ -160,12 +160,16 @@
 	  },
 	  drawMonsterCaughtCount: function(){
 	    displayTag = document.getElementById("score");
-	    displayTag.innerText = this.world.animalsCaught;
+	    displayTag.innerText = this.world.total;
 	  },
 	  drawImages: function(){
 	    this.ctx.drawImage(this.images.background, 0, 0)
 	    this.ctx.drawImage(this.images.farmer, this.world.farmer.x, this.world.farmer.y)
-	    this.ctx.drawImage(this.images.animal, this.world.animals[0].x, this.world.animals[0].y)
+	    for(animal of this.world.animals){
+	      if(!animal.isHidden){
+	        this.ctx.drawImage(this.images.animal, animal.x, animal.y)
+	      }
+	    } 
 	  },
 	  clearCanvas: function(){
 	    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
@@ -176,13 +180,17 @@
 
 /***/ },
 /* 7 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	var World = function(farmer, animals, keyPressTracker){
+	var Animal = __webpack_require__(9)
+	var World = function(farmer, animals, keyPressTracker, dimensions){
 	  this.animalsCaught = 0
 	  this.keyPressTracker = keyPressTracker
 	  this.farmer = farmer
 	  this.animals = animals
+	  this.dimensions = dimensions
+	  this.animalsNeeded = 1;
+	  this.total = 0;
 	}
 	
 	World.prototype = {
@@ -204,8 +212,19 @@
 	      var hasCollided = this.collisionTest(this.farmer, animal)
 	      if(hasCollided){
 	        this.animalsCaught++
+	        this.total++
 	        this.farmer.setPosition()
-	        animal.setPosition()
+	        animal.isHidden = true
+	      }
+	    }
+	
+	    if(this.animalsCaught === this.animalsNeeded){
+	      this.animalsCaught = 0
+	      this.animalsNeeded++
+	      this.animals = []
+	      for(var i = 0; i < this.animalsNeeded; i++ ){
+	        var newAnimal = new Animal(this.dimensions)
+	        this.animals.push(newAnimal)
 	      }
 	    }
 	
@@ -258,14 +277,15 @@
 	  this.worldDimensions = worldDimensions
 	  this.imageSize = 32
 	  this.setPosition()
+	  this.isHidden = false
 	}
 	
 	Animal.prototype = {
 	  //this doesn't belong in here
 	  randomPos: function(dimension) {
-	    var smallest = this.imageSize * 2;
-	    var largest = dimension - this.imageSize;
-	    return this.randomIntFromInterval(smallest, largest);
+	    var smallest = this.imageSize * 2
+	    var largest = dimension - this.imageSize
+	    return this.randomIntFromInterval(smallest, largest)
 	    
 	  },
 	  setPosition: function(){
@@ -275,7 +295,7 @@
 	    console.log("y: ",this.y)
 	  },
 	  randomIntFromInterval: function(min,max){
-	    return Math.floor(Math.random()*(max-min+1)+min);
+	    return Math.floor(Math.random()*(max-min+1)+min)
 	  }
 	
 	}

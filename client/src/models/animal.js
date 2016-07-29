@@ -2,14 +2,15 @@ var Animal = function(worldDimensions) {
   this.worldDimensions = worldDimensions
   this.imageSize = 32
   this.setPosition()
+  this.isHidden = false
 }
 
 Animal.prototype = {
   //this doesn't belong in here
   randomPos: function(dimension) {
-    var smallest = this.imageSize * 2;
-    var largest = dimension - this.imageSize;
-    return this.randomIntFromInterval(smallest, largest);
+    var smallest = this.imageSize * 2
+    var largest = dimension - this.imageSize
+    return this.randomIntFromInterval(smallest, largest)
     
   },
   setPosition: function(){
@@ -19,7 +20,7 @@ Animal.prototype = {
     console.log("y: ",this.y)
   },
   randomIntFromInterval: function(min,max){
-    return Math.floor(Math.random()*(max-min+1)+min);
+    return Math.floor(Math.random()*(max-min+1)+min)
   }
 
 }

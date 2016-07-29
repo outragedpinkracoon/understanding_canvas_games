@@ -25,7 +25,7 @@ window.onload = function () {
   var animal = new Animal(worldDimensions)
   var hero = new Farmer(worldDimensions)
 
-  var world = new World(hero, [animal], keyPressTracker)
+  var world = new World(hero, [animal], keyPressTracker, worldDimensions)
   renderer = new Renderer(display, world, images)
 
   renderer.draw()
