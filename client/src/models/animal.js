@@ -8,15 +8,16 @@ var Animal = function(worldDimensions) {
 Animal.prototype = {
   //this doesn't belong in here
   randomPos: function(dimension) {
-    var smallest = this.imageSize * 2
-    var largest = dimension - this.imageSize
+    var limit = this.imageSize * 2
+    var smallest = limit
+    var largest = dimension - limit
     return this.randomIntFromInterval(smallest, largest)
-    
   },
   setPosition: function(){
     this.x = this.randomPos(this.worldDimensions.width)
     this.y = this.randomPos(this.worldDimensions.height)
   },
+  //move me out
   randomIntFromInterval: function(min,max){
     return Math.floor(Math.random()*(max-min+1)+min)
   }

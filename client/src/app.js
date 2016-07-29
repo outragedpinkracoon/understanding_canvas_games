@@ -5,6 +5,7 @@ var KeyboardEvents = require('./models/keyboardEvents')
 var Display = require('./models/display')
 var Renderer = require('./models/renderer')
 var World = require('./models/world')
+var CollisionHandler = require('./models/collisionHandler')
 
 require('./requestAnimationShim')
 
@@ -25,7 +26,7 @@ window.onload = function () {
   var animal = new Animal(worldDimensions)
   var hero = new Farmer(worldDimensions)
 
-  var world = new World(hero, [animal], keyPressTracker, worldDimensions)
+  var world = new World(hero, [animal], keyPressTracker, worldDimensions, new CollisionHandler())
   renderer = new Renderer(display, world, images)
 
   renderer.draw()

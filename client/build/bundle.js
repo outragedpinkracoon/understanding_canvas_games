@@ -51,6 +51,7 @@
 	var Display = __webpack_require__(5)
 	var Renderer = __webpack_require__(6)
 	var World = __webpack_require__(7)
+	var CollisionHandler = __webpack_require__(14)
 	
 	__webpack_require__(8)
 	
@@ -71,7 +72,7 @@
 	  var animal = new Animal(worldDimensions)
 	  var hero = new Farmer(worldDimensions)
 	
-	  var world = new World(hero, [animal], keyPressTracker, worldDimensions)
+	  var world = new World(hero, [animal], keyPressTracker, worldDimensions, new CollisionHandler())
 	  renderer = new Renderer(display, world, images)
 	
 	  renderer.draw()
@@ -183,7 +184,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var Animal = __webpack_require__(9)
-	var World = function(farmer, animals, keyPressTracker, dimensions){
+	var World = function(farmer, animals, keyPressTracker, dimensions, collisionHandler){
 	  this.animalsCaught = 0
 	  this.keyPressTracker = keyPressTracker
 	  this.farmer = farmer
@@ -191,6 +192,7 @@
 	  this.dimensions = dimensions
 	  this.animalsNeeded = 1;
 	  this.total = 0;
+	  this.collisionHandler = collisionHandler
 	}
 	
 	World.prototype = {
@@ -225,25 +227,19 @@
 	      this.animals.push(newAnimal)
 	    }
 	  },
+	  //pull out collision checker
 	  checkCollisons: function(){
 	    for(animal of this.animals) {
 	      if(animal.isHidden){
 	        continue;
 	      }
-	      var hasCollided = this.collisionTest(this.farmer, animal)
+	      var hasCollided = this.collisionHandler.check(this.farmer, animal)
 	      if(hasCollided){
 	        this.animalsCaught++
 	        this.total++
 	        animal.isHidden = true
 	      }
 	    }
-	  },
-	  collisionTest: function(object1, object2) {
-	    var collisionTolerance = 20
-	    return object1.x <= (object2.x + collisionTolerance)
-	    && object2.x <= (object1.x + collisionTolerance)
-	    && object1.y <= (object2.y + collisionTolerance)
-	    && object2.y <= (object1.y + collisionTolerance)
 	  }
 	}
 	
@@ -292,15 +288,16 @@
 	Animal.prototype = {
 	  //this doesn't belong in here
 	  randomPos: function(dimension) {
-	    var smallest = this.imageSize * 2
-	    var largest = dimension - this.imageSize
+	    var limit = this.imageSize * 2
+	    var smallest = limit
+	    var largest = dimension - limit
 	    return this.randomIntFromInterval(smallest, largest)
-	    
 	  },
 	  setPosition: function(){
 	    this.x = this.randomPos(this.worldDimensions.width)
 	    this.y = this.randomPos(this.worldDimensions.height)
 	  },
+	  //move me out
 	  randomIntFromInterval: function(min,max){
 	    return Math.floor(Math.random()*(max-min+1)+min)
 	  }
@@ -339,6 +336,29 @@
 	}
 	
 	module.exports = Farmer
+
+/***/ },
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */
+/***/ function(module, exports) {
+
+	var CollisionHandler = function(){
+	
+	}
+	
+	CollisionHandler.prototype = {
+	  check: function(object1, object2) {
+	    var collisionTolerance = 20
+	    return object1.x <= (object2.x + collisionTolerance)
+	    && object2.x <= (object1.x + collisionTolerance)
+	    && object1.y <= (object2.y + collisionTolerance)
+	    && object2.y <= (object1.y + collisionTolerance)
+	  }
+	}
+	
+	module.exports = CollisionHandler
 
 /***/ }
 /******/ ]);

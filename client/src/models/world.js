@@ -1,5 +1,5 @@
 var Animal = require('./animal')
-var World = function(farmer, animals, keyPressTracker, dimensions){
+var World = function(farmer, animals, keyPressTracker, dimensions, collisionHandler){
   this.animalsCaught = 0
   this.keyPressTracker = keyPressTracker
   this.farmer = farmer
@@ -7,6 +7,7 @@ var World = function(farmer, animals, keyPressTracker, dimensions){
   this.dimensions = dimensions
   this.animalsNeeded = 1;
   this.total = 0;
+  this.collisionHandler = collisionHandler
 }
 
 World.prototype = {
@@ -41,25 +42,19 @@ World.prototype = {
       this.animals.push(newAnimal)
     }
   },
+  //pull out collision checker
   checkCollisons: function(){
     for(animal of this.animals) {
       if(animal.isHidden){
         continue;
       }
-      var hasCollided = this.collisionTest(this.farmer, animal)
+      var hasCollided = this.collisionHandler.check(this.farmer, animal)
       if(hasCollided){
         this.animalsCaught++
         this.total++
         animal.isHidden = true
       }
     }
-  },
-  collisionTest: function(object1, object2) {
-    var collisionTolerance = 20
-    return object1.x <= (object2.x + collisionTolerance)
-    && object2.x <= (object1.x + collisionTolerance)
-    && object1.y <= (object2.y + collisionTolerance)
-    && object2.y <= (object1.y + collisionTolerance)
   }
 }
 
