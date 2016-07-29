@@ -213,12 +213,11 @@
 	
 	  },
 	  checkForReset:function(){
-	    if(this.animalsCaught === this.animalsNeeded){
+	    if(this.animalsCaught !== this.animalsNeeded) return
 	      this.animalsCaught = 0
-	      this.animalsNeeded++
-	      this.animals = []
-	      this.repopulateAnimals()
-	    }
+	    this.animalsNeeded++
+	    this.animals = []
+	    this.repopulateAnimals()
 	  },
 	  repopulateAnimals: function(){
 	    for(var i = 0; i < this.animalsNeeded; i++ ){
