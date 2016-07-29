@@ -33,10 +33,13 @@ World.prototype = {
       this.animalsCaught = 0
       this.animalsNeeded++
       this.animals = []
-      for(var i = 0; i < this.animalsNeeded; i++ ){
-        var newAnimal = new Animal(this.dimensions)
-        this.animals.push(newAnimal)
-      }
+      this.repopulateAnimals()
+    }
+  },
+  repopulateAnimals: function(){
+    for(var i = 0; i < this.animalsNeeded; i++ ){
+      var newAnimal = new Animal(this.dimensions)
+      this.animals.push(newAnimal)
     }
   },
   checkCollisons: function(){
