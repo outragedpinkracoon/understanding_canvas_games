@@ -24,28 +24,52 @@ World.prototype = {
       this.farmer.moveRight()
     }
 
-    for(animal of this.animals) {
-      var hasCollided = this.collisionTest(this.farmer, animal)
-      if(hasCollided){
-        this.animalsCaught++
-        this.total++
-        this.farmer.setPosition()
-        animal.isHidden = true
-      }
-    }
+    this.checkCollisons()
 
     if(this.animalsCaught === this.animalsNeeded){
+      console.log("before reset")
+      console.log("animals needed:", this.animalsNeeded)
+      console.log("animals caught:", this.animalsCaught)
       this.animalsCaught = 0
+      console.log("animals caught:", this.animalsCaught)
       this.animalsNeeded++
       this.animals = []
       for(var i = 0; i < this.animalsNeeded; i++ ){
         var newAnimal = new Animal(this.dimensions)
         this.animals.push(newAnimal)
       }
+      console.log("after reset")
+      console.log("animals needed:", this.animalsNeeded)
+      console.log("animals caught:", this.animalsCaught)
+
+      console.log("**********************")
     }
 
   },
-  collisionTest:function(object1, object2) {
+  checkCollisons: function(){
+    for(animal of this.animals) {
+      if(animal.isHidden){
+        continue;
+      }
+      var hasCollided = this.collisionTest(this.farmer, animal)
+      if(hasCollided){
+        console.log("before collision")
+        console.log("animals needed:", this.animalsNeeded)
+        console.log("animals caught:", this.animalsCaught)
+        this.animalsCaught++
+        this.total++
+        // this.farmer.setPosition()
+        animal.isHidden = true
+        console.log("after collision")
+        console.log("animals needed:", this.animalsNeeded)
+        console.log("animals caught:", this.animalsCaught)
+
+        console.log("reset result :", this.animalsCaught === this.animalsNeeded)
+        console.log("-------------------")
+      }
+    }
+  },
+  collisionTest: function(object1, object2) {
     var collisionTolerance = 20
     return object1.x <= (object2.x + collisionTolerance)
     && object2.x <= (object1.x + collisionTolerance)

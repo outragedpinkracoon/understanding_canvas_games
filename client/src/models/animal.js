@@ -16,8 +16,6 @@ Animal.prototype = {
   setPosition: function(){
     this.x = this.randomPos(this.worldDimensions.width)
     this.y = this.randomPos(this.worldDimensions.height)
-    console.log("x: ",this.x)
-    console.log("y: ",this.y)
   },
   randomIntFromInterval: function(min,max){
     return Math.floor(Math.random()*(max-min+1)+min)
