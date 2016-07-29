@@ -21,12 +21,12 @@ Renderer.prototype = {
   },
   drawMonsterCaughtCount: function(){
     displayTag = document.getElementById("score");
-    displayTag.innerText = this.world.monstersCaught;
+    displayTag.innerText = this.world.animalsCaught;
   },
   drawImages: function(){
     this.ctx.drawImage(this.images.background, 0, 0)
     this.ctx.drawImage(this.images.hero, this.world.hero.x, this.world.hero.y)
-    this.ctx.drawImage(this.images.monster, this.world.monsters[0].x, this.world.monsters[0].y)
+    this.ctx.drawImage(this.images.monster, this.world.animals[0].x, this.world.animals[0].y)
   },
   clearCanvas: function(){
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)

@@ -1,7 +1,7 @@
 var Images = function(){
   this.background = this.addImage("images/background.png")
   this.hero = this.addImage("images/farmer.png")
-  this.monster = this.addImage("images/chicken_left.png")
+  this.animal = this.addImage("images/chicken_left.png")
 }
 
 Images.prototype = {

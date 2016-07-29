@@ -45,7 +45,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var Hero = __webpack_require__(1)
-	var Monster = __webpack_require__(2)
+	var Animal = __webpack_require__(9)
 	var Images = __webpack_require__(3)
 	var KeyboardEvents = __webpack_require__(4)
 	var Display = __webpack_require__(5)
@@ -68,10 +68,10 @@
 	    height: canvas.height
 	  }
 	
-	  var monster = new Monster(worldDimensions)
+	  var animal = new Animal(worldDimensions)
 	  var hero = new Hero(worldDimensions)
 	
-	  var world = new World(hero, [monster], keyPressTracker)
+	  var world = new World(hero, [animal], keyPressTracker)
 	  renderer = new Renderer(display, world, images)
 	
 	  renderer.draw()
@@ -114,45 +114,14 @@
 	module.exports = Hero
 
 /***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-	var Monster = function(worldDimensions) {
-	  this.worldDimensions = worldDimensions
-	  this.imageSize = 32
-	  this.setPosition()
-	}
-	
-	Monster.prototype = {
-	  //this doesn't belong in here
-	  randomPos: function(dimension) {
-	    var smallest = this.imageSize * 2;
-	    var largest = dimension - this.imageSize;
-	    return this.randomIntFromInterval(smallest, largest);
-	    
-	  },
-	  setPosition: function(){
-	    this.x = this.randomPos(this.worldDimensions.width)
-	    this.y = this.randomPos(this.worldDimensions.height)
-	    console.log("x: ",this.x)
-	    console.log("y: ",this.y)
-	  },
-	  randomIntFromInterval: function(min,max){
-	    return Math.floor(Math.random()*(max-min+1)+min);
-	  }
-	
-	}
-	
-	module.exports = Monster;
-
-/***/ },
+/* 2 */,
 /* 3 */
 /***/ function(module, exports) {
 
 	var Images = function(){
 	  this.background = this.addImage("images/background.png")
 	  this.hero = this.addImage("images/farmer.png")
-	  this.monster = this.addImage("images/chicken_left.png")
+	  this.animal = this.addImage("images/chicken_left.png")
 	}
 	
 	Images.prototype = {
@@ -221,12 +190,12 @@
 	  },
 	  drawMonsterCaughtCount: function(){
 	    displayTag = document.getElementById("score");
-	    displayTag.innerText = this.world.monstersCaught;
+	    displayTag.innerText = this.world.animalsCaught;
 	  },
 	  drawImages: function(){
 	    this.ctx.drawImage(this.images.background, 0, 0)
 	    this.ctx.drawImage(this.images.hero, this.world.hero.x, this.world.hero.y)
-	    this.ctx.drawImage(this.images.monster, this.world.monsters[0].x, this.world.monsters[0].y)
+	    this.ctx.drawImage(this.images.animal, this.world.animals[0].x, this.world.animals[0].y)
 	  },
 	  clearCanvas: function(){
 	    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
@@ -239,11 +208,11 @@
 /* 7 */
 /***/ function(module, exports) {
 
-	var World = function(hero, monsters, keyPressTracker){
-	  this.monstersCaught = 0
+	var World = function(hero, animals, keyPressTracker){
+	  this.animalsCaught = 0
 	  this.keyPressTracker = keyPressTracker
 	  this.hero = hero
-	  this.monsters = monsters
+	  this.animals = animals
 	}
 	
 	World.prototype = {
@@ -261,12 +230,12 @@
 	      this.hero.moveRight()
 	    }
 	
-	    for(monster of this.monsters) {
-	      var hasCollided = this.collisionTest(this.hero, monster)
+	    for(animal of this.animals) {
+	      var hasCollided = this.collisionTest(this.hero, animal)
 	      if(hasCollided){
-	        this.monstersCaught++
+	        this.animalsCaught++
 	        this.hero.setPosition()
-	        monster.setPosition()
+	        animal.setPosition()
 	      }
 	    }
 	
@@ -310,6 +279,38 @@
 	            clearTimeout(id);
 	        };
 	}());
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	var Animal = function(worldDimensions) {
+	  this.worldDimensions = worldDimensions
+	  this.imageSize = 32
+	  this.setPosition()
+	}
+	
+	Animal.prototype = {
+	  //this doesn't belong in here
+	  randomPos: function(dimension) {
+	    var smallest = this.imageSize * 2;
+	    var largest = dimension - this.imageSize;
+	    return this.randomIntFromInterval(smallest, largest);
+	    
+	  },
+	  setPosition: function(){
+	    this.x = this.randomPos(this.worldDimensions.width)
+	    this.y = this.randomPos(this.worldDimensions.height)
+	    console.log("x: ",this.x)
+	    console.log("y: ",this.y)
+	  },
+	  randomIntFromInterval: function(min,max){
+	    return Math.floor(Math.random()*(max-min+1)+min);
+	  }
+	
+	}
+	
+	module.exports = Animal;
 
 /***/ }
 /******/ ]);

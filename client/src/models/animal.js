@@ -1,10 +1,10 @@
-var Monster = function(worldDimensions) {
+var Animal = function(worldDimensions) {
   this.worldDimensions = worldDimensions
   this.imageSize = 32
   this.setPosition()
 }
 
-Monster.prototype = {
+Animal.prototype = {
   //this doesn't belong in here
   randomPos: function(dimension) {
     var smallest = this.imageSize * 2;
@@ -24,4 +24,4 @@ Monster.prototype = {
 
 }
 
-module.exports = Monster;
+module.exports = Animal;
