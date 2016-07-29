@@ -209,26 +209,19 @@
 	    }
 	
 	    this.checkCollisons()
+	    this.checkForReset()
 	
+	  },
+	  checkForReset:function(){
 	    if(this.animalsCaught === this.animalsNeeded){
-	      console.log("before reset")
-	      console.log("animals needed:", this.animalsNeeded)
-	      console.log("animals caught:", this.animalsCaught)
 	      this.animalsCaught = 0
-	      console.log("animals caught:", this.animalsCaught)
 	      this.animalsNeeded++
 	      this.animals = []
 	      for(var i = 0; i < this.animalsNeeded; i++ ){
 	        var newAnimal = new Animal(this.dimensions)
 	        this.animals.push(newAnimal)
 	      }
-	      console.log("after reset")
-	      console.log("animals needed:", this.animalsNeeded)
-	      console.log("animals caught:", this.animalsCaught)
-	
-	      console.log("**********************")
 	    }
-	
 	  },
 	  checkCollisons: function(){
 	    for(animal of this.animals) {
@@ -237,19 +230,9 @@
 	      }
 	      var hasCollided = this.collisionTest(this.farmer, animal)
 	      if(hasCollided){
-	        console.log("before collision")
-	        console.log("animals needed:", this.animalsNeeded)
-	        console.log("animals caught:", this.animalsCaught)
 	        this.animalsCaught++
 	        this.total++
-	        // this.farmer.setPosition()
 	        animal.isHidden = true
-	        console.log("after collision")
-	        console.log("animals needed:", this.animalsNeeded)
-	        console.log("animals caught:", this.animalsCaught)
-	
-	        console.log("reset result :", this.animalsCaught === this.animalsNeeded)
-	        console.log("-------------------")
 	      }
 	    }
 	  },
