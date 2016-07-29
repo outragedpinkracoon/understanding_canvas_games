@@ -144,7 +144,7 @@
 	var Images = function(){
 	  this.background = this.addImage("images/background.png")
 	  this.hero = this.addImage("images/hero.png")
-	  this.monster = this.addImage("images/monster.png")
+	  this.monster = this.addImage("images/chicken_left.png")
 	
 	}
 	
