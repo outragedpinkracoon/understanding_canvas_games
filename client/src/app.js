@@ -25,7 +25,7 @@ window.onload = function () {
   var monster = new Monster(worldDimensions)
   var hero = new Hero(worldDimensions)
 
-  var world = new World(hero, monster, keyPressTracker)
+  var world = new World(hero, [monster], keyPressTracker)
   renderer = new Renderer(display, world, images)
 
   renderer.draw()

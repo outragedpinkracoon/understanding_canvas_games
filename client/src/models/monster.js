@@ -2,7 +2,6 @@ var Monster = function(worldDimensions) {
   this.worldDimensions = worldDimensions
   this.imageSize = 32
   this.setPosition()
- 
 }
 
 Monster.prototype = {

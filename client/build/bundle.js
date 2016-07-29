@@ -71,7 +71,7 @@
 	  var monster = new Monster(worldDimensions)
 	  var hero = new Hero(worldDimensions)
 	
-	  var world = new World(hero, monster, keyPressTracker)
+	  var world = new World(hero, [monster], keyPressTracker)
 	  renderer = new Renderer(display, world, images)
 	
 	  renderer.draw()
@@ -121,7 +121,6 @@
 	  this.worldDimensions = worldDimensions
 	  this.imageSize = 32
 	  this.setPosition()
-	 
 	}
 	
 	Monster.prototype = {
@@ -154,7 +153,6 @@
 	  this.background = this.addImage("images/background.png")
 	  this.hero = this.addImage("images/farmer.png")
 	  this.monster = this.addImage("images/chicken_left.png")
-	
 	}
 	
 	Images.prototype = {
@@ -228,7 +226,7 @@
 	  drawImages: function(){
 	    this.ctx.drawImage(this.images.background, 0, 0)
 	    this.ctx.drawImage(this.images.hero, this.world.hero.x, this.world.hero.y)
-	    this.ctx.drawImage(this.images.monster, this.world.monster.x, this.world.monster.y)
+	    this.ctx.drawImage(this.images.monster, this.world.monsters[0].x, this.world.monsters[0].y)
 	  },
 	  clearCanvas: function(){
 	    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
@@ -241,12 +239,11 @@
 /* 7 */
 /***/ function(module, exports) {
 
-	var World = function(hero, monster, keyPressTracker){
+	var World = function(hero, monsters, keyPressTracker){
 	  this.monstersCaught = 0
 	  this.keyPressTracker = keyPressTracker
-	
 	  this.hero = hero
-	  this.monster = monster
+	  this.monsters = monsters
 	}
 	
 	World.prototype = {
@@ -264,12 +261,13 @@
 	      this.hero.moveRight()
 	    }
 	
-	    var hasCollided = this.collisionTest(this.hero, this.monster)
-	
-	    if(hasCollided){
-	      this.monstersCaught++
-	      this.hero.setPosition()
-	      this.monster.setPosition()
+	    for(monster of this.monsters) {
+	      var hasCollided = this.collisionTest(this.hero, monster)
+	      if(hasCollided){
+	        this.monstersCaught++
+	        this.hero.setPosition()
+	        monster.setPosition()
+	      }
 	    }
 	
 	  },

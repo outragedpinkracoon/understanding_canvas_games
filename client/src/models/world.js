@@ -1,9 +1,8 @@
-var World = function(hero, monster, keyPressTracker){
+var World = function(hero, monsters, keyPressTracker){
   this.monstersCaught = 0
   this.keyPressTracker = keyPressTracker
-
   this.hero = hero
-  this.monster = monster
+  this.monsters = monsters
 }
 
 World.prototype = {
@@ -21,12 +20,13 @@ World.prototype = {
       this.hero.moveRight()
     }
 
-    var hasCollided = this.collisionTest(this.hero, this.monster)
-
-    if(hasCollided){
-      this.monstersCaught++
-      this.hero.setPosition()
-      this.monster.setPosition()
+    for(monster of this.monsters) {
+      var hasCollided = this.collisionTest(this.hero, monster)
+      if(hasCollided){
+        this.monstersCaught++
+        this.hero.setPosition()
+        monster.setPosition()
+      }
     }
 
   },
