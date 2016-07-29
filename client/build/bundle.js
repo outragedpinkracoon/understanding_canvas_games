@@ -216,11 +216,11 @@
 	    }.bind(this))
 	  },
 	  drawMonsterCaughtCount: function(){
-	    this.ctx.fillStyle = "rgb(250, 250, 250)"
+	    this.ctx.fillStyle = "rgb(255, 204, 0)"
 	    this.ctx.font = "24px Helvetica"
 	    this.ctx.textAlign = "left"
 	    this.ctx.textBaseline = "top"
-	    this.ctx.fillText("Monsters caught: " + this.world.monstersCaught, this.imageSize, this.imageSize)
+	    this.ctx.fillText("Chickens caught: " + this.world.monstersCaught, this.imageSize, this.imageSize)
 	  },
 	  drawImages: function(){
 	    this.ctx.drawImage(this.images.background, 0, 0)
