@@ -1,30 +1,30 @@
-var World = function(hero, animals, keyPressTracker){
+var World = function(farmer, animals, keyPressTracker){
   this.animalsCaught = 0
   this.keyPressTracker = keyPressTracker
-  this.hero = hero
+  this.farmer = farmer
   this.animals = animals
 }
 
 World.prototype = {
   update: function() {
     if (38 in this.keyPressTracker) { //up
-      this.hero.moveUp()
+      this.farmer.moveUp()
     }
     if (40 in this.keyPressTracker) { //down
-      this.hero.moveDown()
+      this.farmer.moveDown()
     }
     if (37 in this.keyPressTracker) { //left
-      this.hero.moveLeft()
+      this.farmer.moveLeft()
     }
     if (39 in this.keyPressTracker) { //right
-      this.hero.moveRight()
+      this.farmer.moveRight()
     }
 
     for(animal of this.animals) {
-      var hasCollided = this.collisionTest(this.hero, animal)
+      var hasCollided = this.collisionTest(this.farmer, animal)
       if(hasCollided){
         this.animalsCaught++
-        this.hero.setPosition()
+        this.farmer.setPosition()
         animal.setPosition()
       }
     }

@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Hero = __webpack_require__(1)
+	var Farmer = __webpack_require__(10)
 	var Animal = __webpack_require__(9)
 	var Images = __webpack_require__(3)
 	var KeyboardEvents = __webpack_require__(4)
@@ -69,7 +69,7 @@
 	  }
 	
 	  var animal = new Animal(worldDimensions)
-	  var hero = new Hero(worldDimensions)
+	  var hero = new Farmer(worldDimensions)
 	
 	  var world = new World(hero, [animal], keyPressTracker)
 	  renderer = new Renderer(display, world, images)
@@ -83,44 +83,14 @@
 
 
 /***/ },
-/* 1 */
-/***/ function(module, exports) {
-
-	var Hero = function(worldDimensions) {
-	  this.speed = 4
-	  this.worldDimensions = worldDimensions
-	  this.setPosition()
-	}
-	
-	Hero.prototype = {
-	  moveUp: function(){
-	      this.y -= this.speed
-	  },
-	  moveDown: function(){
-	    this.y += this.speed
-	  },
-	  moveLeft: function(){
-	    this.x -= this.speed
-	  },
-	  moveRight: function(){
-	    this.x += this.speed
-	  },
-	  setPosition: function(){
-	    this.x = this.worldDimensions.width / 2
-	    this.y = this.worldDimensions.height / 2
-	  }
-	}
-	
-	module.exports = Hero
-
-/***/ },
+/* 1 */,
 /* 2 */,
 /* 3 */
 /***/ function(module, exports) {
 
 	var Images = function(){
 	  this.background = this.addImage("images/background.png")
-	  this.hero = this.addImage("images/farmer.png")
+	  this.farmer = this.addImage("images/farmer.png")
 	  this.animal = this.addImage("images/chicken_left.png")
 	}
 	
@@ -194,7 +164,7 @@
 	  },
 	  drawImages: function(){
 	    this.ctx.drawImage(this.images.background, 0, 0)
-	    this.ctx.drawImage(this.images.hero, this.world.hero.x, this.world.hero.y)
+	    this.ctx.drawImage(this.images.farmer, this.world.farmer.x, this.world.farmer.y)
 	    this.ctx.drawImage(this.images.animal, this.world.animals[0].x, this.world.animals[0].y)
 	  },
 	  clearCanvas: function(){
@@ -208,33 +178,33 @@
 /* 7 */
 /***/ function(module, exports) {
 
-	var World = function(hero, animals, keyPressTracker){
+	var World = function(farmer, animals, keyPressTracker){
 	  this.animalsCaught = 0
 	  this.keyPressTracker = keyPressTracker
-	  this.hero = hero
+	  this.farmer = farmer
 	  this.animals = animals
 	}
 	
 	World.prototype = {
 	  update: function() {
 	    if (38 in this.keyPressTracker) { //up
-	      this.hero.moveUp()
+	      this.farmer.moveUp()
 	    }
 	    if (40 in this.keyPressTracker) { //down
-	      this.hero.moveDown()
+	      this.farmer.moveDown()
 	    }
 	    if (37 in this.keyPressTracker) { //left
-	      this.hero.moveLeft()
+	      this.farmer.moveLeft()
 	    }
 	    if (39 in this.keyPressTracker) { //right
-	      this.hero.moveRight()
+	      this.farmer.moveRight()
 	    }
 	
 	    for(animal of this.animals) {
-	      var hasCollided = this.collisionTest(this.hero, animal)
+	      var hasCollided = this.collisionTest(this.farmer, animal)
 	      if(hasCollided){
 	        this.animalsCaught++
-	        this.hero.setPosition()
+	        this.farmer.setPosition()
 	        animal.setPosition()
 	      }
 	    }
@@ -311,6 +281,37 @@
 	}
 	
 	module.exports = Animal;
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	var Farmer = function(worldDimensions) {
+	  this.speed = 4
+	  this.worldDimensions = worldDimensions
+	  this.setPosition()
+	}
+	
+	Farmer.prototype = {
+	  moveUp: function(){
+	      this.y -= this.speed
+	  },
+	  moveDown: function(){
+	    this.y += this.speed
+	  },
+	  moveLeft: function(){
+	    this.x -= this.speed
+	  },
+	  moveRight: function(){
+	    this.x += this.speed
+	  },
+	  setPosition: function(){
+	    this.x = this.worldDimensions.width / 2
+	    this.y = this.worldDimensions.height / 2
+	  }
+	}
+	
+	module.exports = Farmer
 
 /***/ }
 /******/ ]);

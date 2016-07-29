@@ -1,4 +1,4 @@
-var Hero = require('./models/hero')
+var Farmer = require('./models/farmer')
 var Animal = require('./models/animal')
 var Images = require('./models/images')
 var KeyboardEvents = require('./models/keyboardEvents')
@@ -23,7 +23,7 @@ window.onload = function () {
   }
 
   var animal = new Animal(worldDimensions)
-  var hero = new Hero(worldDimensions)
+  var hero = new Farmer(worldDimensions)
 
   var world = new World(hero, [animal], keyPressTracker)
   renderer = new Renderer(display, world, images)

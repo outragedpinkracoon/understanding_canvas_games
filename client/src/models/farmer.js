@@ -1,10 +1,10 @@
-var Hero = function(worldDimensions) {
+var Farmer = function(worldDimensions) {
   this.speed = 4
   this.worldDimensions = worldDimensions
   this.setPosition()
 }
 
-Hero.prototype = {
+Farmer.prototype = {
   moveUp: function(){
       this.y -= this.speed
   },
@@ -23,4 +23,4 @@ Hero.prototype = {
   }
 }
 
-module.exports = Hero
+module.exports = Farmer
