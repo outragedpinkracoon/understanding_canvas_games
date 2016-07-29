@@ -143,7 +143,7 @@
 
 	var Images = function(){
 	  this.background = this.addImage("images/background.png")
-	  this.hero = this.addImage("images/hero.png")
+	  this.hero = this.addImage("images/farmer.png")
 	  this.monster = this.addImage("images/chicken_left.png")
 	
 	}
@@ -181,11 +181,8 @@
 /***/ function(module, exports) {
 
 	var Display = function(){
-	  this.canvas = document.createElement("canvas")
+	  this.canvas = document.getElementsByTagName("canvas")[0]
 	  this.ctx = this.canvas.getContext("2d")
-	  this.canvas.width = 512
-	  this.canvas.height = 480
-	  document.body.appendChild(this.canvas)
 	}
 	module.exports = Display
 
@@ -216,11 +213,8 @@
 	    }.bind(this))
 	  },
 	  drawMonsterCaughtCount: function(){
-	    this.ctx.fillStyle = "rgb(255, 204, 0)"
-	    this.ctx.font = "24px Helvetica"
-	    this.ctx.textAlign = "left"
-	    this.ctx.textBaseline = "top"
-	    this.ctx.fillText("Chickens caught: " + this.world.monstersCaught, this.imageSize, this.imageSize)
+	    displayTag = document.getElementById("score");
+	    displayTag.innerText = this.world.monstersCaught;
 	  },
 	  drawImages: function(){
 	    this.ctx.drawImage(this.images.background, 0, 0)

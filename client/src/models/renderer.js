@@ -20,11 +20,8 @@ Renderer.prototype = {
     }.bind(this))
   },
   drawMonsterCaughtCount: function(){
-    this.ctx.fillStyle = "rgb(255, 204, 0)"
-    this.ctx.font = "24px Helvetica"
-    this.ctx.textAlign = "left"
-    this.ctx.textBaseline = "top"
-    this.ctx.fillText("Chickens caught: " + this.world.monstersCaught, this.imageSize, this.imageSize)
+    displayTag = document.getElementById("score");
+    displayTag.innerText = this.world.monstersCaught;
   },
   drawImages: function(){
     this.ctx.drawImage(this.images.background, 0, 0)
