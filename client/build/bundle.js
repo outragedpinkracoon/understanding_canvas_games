@@ -233,7 +233,6 @@
 /***/ function(module, exports) {
 
 	var World = function(hero, monster, keyPressTracker){
-	  this.imageSize = 32
 	  this.monstersCaught = 0
 	  this.keyPressTracker = keyPressTracker
 	
@@ -266,10 +265,11 @@
 	
 	  },
 	  collisionTest:function(object1, object2) {
-	    return object1.x <= (object2.x + this.imageSize)
-	    && object2.x <= (object1.x + this.imageSize)
-	    && object1.y <= (object2.y + this.imageSize)
-	    && object2.y <= (object1.y + this.imageSize)
+	    var collisionTolerance = 20
+	    return object1.x <= (object2.x + collisionTolerance)
+	    && object2.x <= (object1.x + collisionTolerance)
+	    && object1.y <= (object2.y + collisionTolerance)
+	    && object2.y <= (object1.y + collisionTolerance)
 	  }
 	}
 	
