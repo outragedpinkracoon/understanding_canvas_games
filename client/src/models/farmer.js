@@ -6,7 +6,7 @@ var Farmer = function(worldDimensions) {
 
 Farmer.prototype = {
   moveUp: function(){
-      this.y -= this.speed
+    this.y -= this.speed
   },
   moveDown: function(){
     this.y += this.speed
