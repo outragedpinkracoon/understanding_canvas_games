@@ -7,6 +7,7 @@ var World = function(options){
   this.collisionHandler = options.collisionHandler
   this.animalDimensions = options.animals[0].dimensions
   this.stats = options.worldStats
+  this.obstacles = options.obstacles
 }
 
 World.prototype = {
@@ -42,6 +43,9 @@ World.prototype = {
   },
   //pull out collision checker
   checkCollisons: function(){
+    this.checkAnimalCollisions()
+  },
+  checkAnimalCollisions: function(){
     for(animal of this.animals) {
       if(animal.isHidden){
         continue;

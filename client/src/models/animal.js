@@ -7,7 +7,6 @@ var Animal = function(objectDimensions, worldDimensions) {
 }
 
 Animal.prototype = {
-  //this doesn't belong in here
   randomPos: function(dimension) {
     var limit = this.imageSize * 2
     var smallest = limit
@@ -18,11 +17,9 @@ Animal.prototype = {
     this.x = this.randomPos(this.worldDimensions.width)
     this.y = this.randomPos(this.worldDimensions.height)
   },
-  //move me out
   randomIntFromInterval: function(min,max){
     return Math.floor(Math.random()*(max-min+1)+min)
   }
-
 }
 
 module.exports = Animal;

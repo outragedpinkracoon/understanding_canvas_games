@@ -1,6 +1,7 @@
 var Farmer = require('./models/farmer')
 var Animal = require('./models/animal')
 var Images = require('./models/images')
+var Pond = require('./models/obstacles/pond')
 var KeyboardEvents = require('./models/keyboardEvents')
 var Display = require('./models/display')
 var Dimensions = require('./models/dimensions')
@@ -24,13 +25,16 @@ window.onload = function () {
   var animal = new Animal(sharedDimensions, worldDimensions)
   var farmer = new Farmer(sharedDimensions, worldDimensions)
 
+  var obstacles = generateObstacles();
+
   var worldOptions = {
     farmer: farmer,
     animals: [animal],
     keyPressTracker: new KeyboardEvents().keyPressTracker,
     dimensions: worldDimensions,
     collisionHandler: new CollisionHandler(),
-    worldStats: new WorldStats()
+    worldStats: new WorldStats(),
+    obstacles: obstacles
   }
 
   var world = new World(worldOptions)
@@ -40,5 +44,8 @@ window.onload = function () {
   
 }
 
+function generateObstacles(){
+  return [new Pond(328, 60)]
+}
 
 
