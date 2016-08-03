@@ -1,14 +1,12 @@
 var Animal = require('./animal')
-var World = function(farmer, animals, keyPressTracker, dimensions, collisionHandler){
-  this.animalsCaught = 0
+var World = function(farmer, animals, keyPressTracker, dimensions, collisionHandler, worldStats){
   this.keyPressTracker = keyPressTracker
   this.farmer = farmer
   this.animals = animals
   this.dimensions = dimensions
-  this.animalsNeeded = 1;
-  this.total = 0;
   this.collisionHandler = collisionHandler
   this.animalDimensions = this.animals[0].dimensions
+  this.stats = worldStats
 }
 
 World.prototype = {
@@ -31,14 +29,13 @@ World.prototype = {
 
   },
   checkForReset:function(){
-    if(this.animalsCaught !== this.animalsNeeded) return
-      this.animalsCaught = 0
-    this.animalsNeeded++
+    if(!this.stats.allAnimalsCaught()) return
+    this.stats.nextTurn()
     this.animals = []
     this.repopulateAnimals()
   },
   repopulateAnimals: function(){
-    for(var i = 0; i < this.animalsNeeded; i++ ){
+    for(var i = 0; i < this.stats.animalsNeeded; i++ ){
       var newAnimal = new Animal(this.animalDimensions,this.dimensions)
       this.animals.push(newAnimal)
     }
@@ -51,8 +48,7 @@ World.prototype = {
       }
       var hasCollided = this.collisionHandler.check(this.farmer, animal)
       if(hasCollided){
-        this.animalsCaught++
-        this.total++
+        this.stats.animalCaught()
         animal.isHidden = true
       }
     }

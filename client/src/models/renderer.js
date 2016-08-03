@@ -21,7 +21,7 @@ Renderer.prototype = {
   },
   drawMonsterCaughtCount: function(){
     displayTag = document.getElementById("score");
-    displayTag.innerText = this.world.total;
+    displayTag.innerText = this.world.stats.total;
   },
   drawImages: function(){
     this.ctx.drawImage(this.images.background, 0, 0)
