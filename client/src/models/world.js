@@ -8,6 +8,7 @@ var World = function(farmer, animals, keyPressTracker, dimensions, collisionHand
   this.animalsNeeded = 1;
   this.total = 0;
   this.collisionHandler = collisionHandler
+  this.animalDimensions = this.animals[0].dimensions
 }
 
 World.prototype = {
@@ -38,7 +39,7 @@ World.prototype = {
   },
   repopulateAnimals: function(){
     for(var i = 0; i < this.animalsNeeded; i++ ){
-      var newAnimal = new Animal(this.dimensions)
+      var newAnimal = new Animal(this.animalDimensions,this.dimensions)
       this.animals.push(newAnimal)
     }
   },

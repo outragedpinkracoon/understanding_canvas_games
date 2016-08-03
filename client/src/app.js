@@ -3,6 +3,7 @@ var Animal = require('./models/animal')
 var Images = require('./models/images')
 var KeyboardEvents = require('./models/keyboardEvents')
 var Display = require('./models/display')
+var Dimensions = require('./models/dimensions')
 var Renderer = require('./models/renderer')
 var World = require('./models/world')
 var CollisionHandler = require('./models/collisionHandler')
@@ -18,13 +19,11 @@ window.onload = function () {
 
   var keyPressTracker = new KeyboardEvents().keyPressTracker
 
-  var worldDimensions = {
-    width: canvas.width,
-    height: canvas.height
-  }
+  var worldDimensions = new Dimensions(canvas.width,canvas.height)
+  var sharedDimensions = new Dimensions(32,32);
 
-  var animal = new Animal(worldDimensions)
-  var hero = new Farmer(worldDimensions)
+  var animal = new Animal(sharedDimensions, worldDimensions)
+  var hero = new Farmer(sharedDimensions, worldDimensions)
 
   var world = new World(hero, [animal], keyPressTracker, worldDimensions, new CollisionHandler())
   renderer = new Renderer(display, world, images)

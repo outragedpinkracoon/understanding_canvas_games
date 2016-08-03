@@ -1,8 +1,9 @@
-var Animal = function(worldDimensions) {
+var Animal = function(objectDimensions, worldDimensions) {
   this.worldDimensions = worldDimensions
   this.imageSize = 32
   this.setPosition()
   this.isHidden = false
+  this.dimensions = objectDimensions
 }
 
 Animal.prototype = {
