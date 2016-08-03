@@ -1,12 +1,12 @@
 var Animal = require('./animal')
-var World = function(farmer, animals, keyPressTracker, dimensions, collisionHandler, worldStats){
-  this.keyPressTracker = keyPressTracker
-  this.farmer = farmer
-  this.animals = animals
-  this.dimensions = dimensions
-  this.collisionHandler = collisionHandler
-  this.animalDimensions = this.animals[0].dimensions
-  this.stats = worldStats
+var World = function(options){
+  this.keyPressTracker = options.keyPressTracker
+  this.farmer = options.farmer
+  this.animals = options.animals
+  this.dimensions = options.dimensions
+  this.collisionHandler = options.collisionHandler
+  this.animalDimensions = options.animals[0].dimensions
+  this.stats = options.worldStats
 }
 
 World.prototype = {

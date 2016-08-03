@@ -18,15 +18,22 @@ window.onload = function () {
   var ctx = display.ctx
   var images = new Images();
 
-  var keyPressTracker = new KeyboardEvents().keyPressTracker
-
   var worldDimensions = new Dimensions(canvas.width,canvas.height)
   var sharedDimensions = new Dimensions(32,32);
 
   var animal = new Animal(sharedDimensions, worldDimensions)
-  var hero = new Farmer(sharedDimensions, worldDimensions)
+  var farmer = new Farmer(sharedDimensions, worldDimensions)
 
-  var world = new World(hero, [animal], keyPressTracker, worldDimensions, new CollisionHandler(), new WorldStats())
+  var worldOptions = {
+    farmer: farmer,
+    animals: [animal],
+    keyPressTracker: new KeyboardEvents().keyPressTracker,
+    dimensions: worldDimensions,
+    collisionHandler: new CollisionHandler(),
+    worldStats: new WorldStats()
+  }
+
+  var world = new World(worldOptions)
   renderer = new Renderer(display, world, images)
 
   renderer.draw()
