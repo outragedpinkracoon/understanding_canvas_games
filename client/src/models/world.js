@@ -43,17 +43,32 @@ World.prototype = {
   },
   checkCollisons: function(){
     this.checkAnimalCollisions()
+    this.checkObjectCollisions()
   },
   checkAnimalCollisions: function(){
     for(animal of this.animals) {
       if(animal.isHidden) continue
 
-      var hasCollided = this.collisionHandler.check(this.farmer, animal)
+      var hasCollided = this.checkCollision(this.farmer, animal)
       if(!hasCollided) continue
 
       this.stats.animalCaught()
       animal.isHidden = true
     }
+  },
+  checkObjectCollisions: function(){
+    for(var obstacle of this.obstacles) {
+      var hasCollided = this.checkCollision(this.farmer, obstacle)
+      if(!hasCollided) {
+        this.farmer.speed = this.farmer.originalSpeed
+      }
+      else {
+      this.farmer.speed = obstacle.movementModifier
+      }
+    }
+  },
+  checkCollision: function(object1, object2){
+    return this.collisionHandler.check(object1, object2)
   }
 }
 

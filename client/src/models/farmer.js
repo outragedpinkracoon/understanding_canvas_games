@@ -3,6 +3,7 @@ var Farmer = function(objectDimensions,worldDimensions) {
   this.worldDimensions = worldDimensions
   this.setPosition()
   this.dimensions = objectDimensions
+  this.originalSpeed = this.speed
 }
 
 Farmer.prototype = {

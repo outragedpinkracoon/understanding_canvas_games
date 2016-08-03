@@ -45,7 +45,7 @@ window.onload = function () {
 }
 
 function generateObstacles(){
-  return [new Pond(328, 60)]
+  return [new Pond(328, 60, new Dimensions(125,90))]
 }
 
 
