@@ -41,20 +41,18 @@ World.prototype = {
       this.animals.push(newAnimal)
     }
   },
-  //pull out collision checker
   checkCollisons: function(){
     this.checkAnimalCollisions()
   },
   checkAnimalCollisions: function(){
     for(animal of this.animals) {
-      if(animal.isHidden){
-        continue;
-      }
+      if(animal.isHidden) continue
+
       var hasCollided = this.collisionHandler.check(this.farmer, animal)
-      if(hasCollided){
-        this.stats.animalCaught()
-        animal.isHidden = true
-      }
+      if(!hasCollided) continue
+
+      this.stats.animalCaught()
+      animal.isHidden = true
     }
   }
 }
