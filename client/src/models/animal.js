@@ -1,3 +1,4 @@
+//TODO add fox
 var Animal = function(objectDimensions, worldDimensions) {
   this.worldDimensions = worldDimensions
   this.imageSize = 32

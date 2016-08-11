@@ -1,7 +1,7 @@
 var Animal = require('./animal')
 var World = function(options){
   this.keyPressTracker = options.keyPressTracker
-  this.farmer = options.farmer
+  this.farmers = options.farmers
   this.animals = options.animals
   this.dimensions = options.dimensions
   this.collisionHandler = options.collisionHandler
@@ -13,16 +13,16 @@ var World = function(options){
 World.prototype = {
   update: function() {
     if (38 in this.keyPressTracker) { //up
-      this.farmer.moveUp()
+      this.farmers[0].moveUp()
     }
     if (40 in this.keyPressTracker) { //down
-      this.farmer.moveDown()
+      this.farmers[0].moveDown()
     }
     if (37 in this.keyPressTracker) { //left
-      this.farmer.moveLeft()
+      this.farmers[0].moveLeft()
     }
     if (39 in this.keyPressTracker) { //right
-      this.farmer.moveRight()
+      this.farmers[0].moveRight()
     }
 
     this.checkCollisons()
@@ -49,7 +49,7 @@ World.prototype = {
     for(animal of this.animals) {
       if(animal.isHidden) continue
 
-      var hasCollided = this.checkCollision(this.farmer, animal)
+      var hasCollided = this.checkCollision(this.farmers[0], animal)
       if(!hasCollided) continue
 
       this.stats.animalCaught()
@@ -58,12 +58,12 @@ World.prototype = {
   },
   checkObjectCollisions: function(){
     for(var obstacle of this.obstacles) {
-      var hasCollided = this.checkCollision(this.farmer, obstacle)
+      var hasCollided = this.checkCollision(this.farmers[0], obstacle)
       if(!hasCollided) {
-        this.farmer.speed = this.farmer.originalSpeed
+        this.farmers[0].speed = this.farmers[0].originalSpeed
       }
       else {
-      this.farmer.speed = obstacle.movementModifier
+      this.farmers[0].speed = obstacle.movementModifier
       }
     }
   },

@@ -17,7 +17,7 @@ window.onload = function () {
   var display = new Display()
   var canvas = display.canvas
   var ctx = display.ctx
-  var images = new Images();
+  var images = new Images()
 
   var worldDimensions = new Dimensions(canvas.width,canvas.height)
   var sharedDimensions = new Dimensions(32,32);
@@ -25,10 +25,11 @@ window.onload = function () {
   var animal = new Animal(sharedDimensions, worldDimensions)
   var farmer = new Farmer(sharedDimensions, worldDimensions)
 
-  var obstacles = generateObstacles();
+  var farmers = [farmer]
+  var obstacles = generateObstacles()
 
   var worldOptions = {
-    farmer: farmer,
+    farmers: farmers,
     animals: [animal],
     keyPressTracker: new KeyboardEvents().keyPressTracker,
     dimensions: worldDimensions,
