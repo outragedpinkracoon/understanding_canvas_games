@@ -1,5 +1,6 @@
-var OBSTACLEKIND = {
-  POND:1
+var ObstacleKind = {
+  POND:1,
+  GRASS:2
 }
 
-module.exports = OBSTACLEKIND
+module.exports = ObstacleKind
