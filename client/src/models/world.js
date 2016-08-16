@@ -10,19 +10,21 @@ var World = function (options) {
   this.obstacles = options.obstacles
 }
 
-World.prototype = {
+World.prototype = {  //73 is i 74 is j 76 is l
   update: function () {
-    if (38 in this.keyPressTracker) { //up
-      this.farmers[0].moveUp()
-    }
-    if (40 in this.keyPressTracker) { //down
-      this.farmers[0].moveDown()
-    }
-    if (37 in this.keyPressTracker) { //left
-      this.farmers[0].moveLeft()
-    }
-    if (39 in this.keyPressTracker) { //right
-      this.farmers[0].moveRight()
+    for (var farmer of this.farmers) {
+      if (farmer.controls.up in this.keyPressTracker) {
+        farmer.moveUp()
+      }
+      if (farmer.controls.down in this.keyPressTracker) {
+        farmer.moveDown()
+      }
+      if (farmer.controls.left in this.keyPressTracker) {
+        farmer.moveLeft()
+      }
+      if (farmer.controls.right in this.keyPressTracker) {
+        farmer.moveRight()
+      }
     }
 
     this.checkCollisons()
@@ -61,7 +63,7 @@ World.prototype = {
     var collision
     for (var obstacle of this.obstacles) {
       var hasCollided = this.checkCollision(this.farmers[0], obstacle)
-      if(hasCollided) collision = obstacle
+      if (hasCollided) collision = obstacle
     }
     if (collision) {
       this.farmers[0].speed = collision.movementModifier

@@ -6,6 +6,7 @@ var Farmer = function(options) {
   this.originalSpeed = this.speed
   this.score = 0
   this.collisionHandler = options.collisionHandler
+  this.controls = options.controls
 }
 
 Farmer.prototype = {

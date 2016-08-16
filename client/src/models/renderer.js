@@ -26,6 +26,7 @@ Renderer.prototype = {
   drawImages: function(){
     this.ctx.drawImage(this.images.background, 0, 0)
     this.ctx.drawImage(this.images.farmer, this.world.farmers[0].x, this.world.farmers[0].y)
+    this.ctx.drawImage(this.images.farmer, this.world.farmers[1].x, this.world.farmers[1].y)
     for(animal of this.world.animals){
       if(!animal.isHidden){
         this.ctx.drawImage(this.images.animal, animal.x, animal.y)

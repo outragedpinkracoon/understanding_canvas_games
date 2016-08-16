@@ -37,11 +37,25 @@ window.onload = function () {
   var farmerOptions = {
     objectDimensions: sharedDimensions, 
     worldDimensions: worldDimensions, 
-    collisionHandler: collisionHandler
+    collisionHandler: collisionHandler,
+    controls: {
+      up: 38,
+      down: 40,
+      left: 37,
+      right: 39 //87 w 65 a 68 d S 83
+    }
   }
-  var farmer = new Farmer(farmerOptions)
 
-  var farmers = [farmer]
+  var farmer = new Farmer(farmerOptions)
+  farmerOptions.controls = {
+      up: 87,
+      down: 83,
+      left: 65,
+      right: 68 //87 w 65 a 68 d S 83
+    }
+  var farmer2 = new Farmer(farmerOptions)
+
+  var farmers = [farmer,farmer2]
   var obstacleGenerator = new ObstacleGenerator()
   var obstacles = obstacleGenerator.generate()
 
