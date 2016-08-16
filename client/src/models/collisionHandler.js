@@ -8,7 +8,8 @@ CollisionHandler.prototype = {
     var two = this.checkTwo(object1,object2)
     var three = this.checkThree(object1,object2)
     var four = this.checkFour(object1,object2)
-    return one && two && three && four
+    result = one && two && three && four
+    return result
   },
   checkOne: function(object1, object2){
     return object1.x < object2.x + object2.dimensions.width

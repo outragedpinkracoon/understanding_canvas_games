@@ -66,8 +66,37 @@ function generateObstacles(){
     kind: ObstacleKind.POND,
   }
 
+  var grassTopLeftOptions = {
+    coords: new Coords({x: 118, y:65}),
+    dimensions: new Dimensions({width:48,height:48}),
+    kind: ObstacleKind.GRASS,
+  }
+
+  var grassBottomRightOptions = {
+    coords: new Coords({ x: 404, y: 351 }),
+    dimensions: new Dimensions({ width: 48, height: 48 }),
+    kind: ObstacleKind.GRASS,
+  }
+
+  var grassLeftBorderOptions = {
+    coords: new Coords({ x: 2, y: 43 }),
+    dimensions: new Dimensions({ width: 26, height: 399 }),
+    kind: ObstacleKind.GRASS,
+  }
+
+
+  var grassRightBorderOptions = {
+    coords: new Coords({ x: 490, y: 42 }),
+    dimensions: new Dimensions({ width: 26, height: 399 }),
+    kind: ObstacleKind.GRASS,
+  }
+
   var pond = factory.create(pondOptions)
-  return [pond]
+  var grassTopLeft = factory.create(grassTopLeftOptions)
+  var grassLowerRight = factory.create(grassBottomRightOptions)
+  var grassLeftBorder = factory.create(grassLeftBorderOptions)
+  var grassRightBorder = factory.create(grassRightBorderOptions)
+  return [pond, grassTopLeft, grassLowerRight, grassLeftBorder, grassRightBorder]
 }
 
 
