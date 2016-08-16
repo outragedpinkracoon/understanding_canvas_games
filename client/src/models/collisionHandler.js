@@ -22,6 +22,18 @@ CollisionHandler.prototype = {
   },
   checkFour: function(object1, object2){
     return object1.dimensions.height + object1.y > object2.y
+  },
+  atTop: function(collider){
+    return collider.y - collider.dimensions.height <= 0
+  },
+  atBottom: function(collider){
+    return collider.y + (collider.dimensions.height * 2) >= collider.worldDimensions.height
+  },
+  atLeft: function(collider){
+    return collider.x <= 0
+  },
+  atRight: function(collider){
+    return (collider.x + collider.dimensions.width) >= collider.worldDimensions.width
   }
 }
 

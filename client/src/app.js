@@ -31,8 +31,15 @@ window.onload = function () {
   var worldDimensions = new Dimensions(worldDimensionsOptions)
   var sharedDimensions = new Dimensions({width: 32,height:32})
 
+  var collisionHandler = new CollisionHandler()
+
   var animal = new Animal(sharedDimensions, worldDimensions)
-  var farmer = new Farmer(sharedDimensions, worldDimensions)
+  var farmerOptions = {
+    objectDimensions: sharedDimensions, 
+    worldDimensions: worldDimensions, 
+    collisionHandler: collisionHandler
+  }
+  var farmer = new Farmer(farmerOptions)
 
   var farmers = [farmer]
   var obstacleGenerator = new ObstacleGenerator()
@@ -43,7 +50,7 @@ window.onload = function () {
     animals: [animal],
     keyPressTracker: new KeyboardEvents().keyPressTracker,
     dimensions: worldDimensions,
-    collisionHandler: new CollisionHandler(),
+    collisionHandler: collisionHandler,
     worldStats: new WorldStats(),
     obstacles: obstacles
   }
