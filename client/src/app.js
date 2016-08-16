@@ -9,6 +9,7 @@ var WorldStats = require('./models/worldStats')
 var Renderer = require('./models/renderer')
 var World = require('./models/world')
 var CollisionHandler = require('./models/collisionHandler')
+var FarmerGenerator = require('./models/farmerGenerator')
 
 require('./requestAnimationShim')
 
@@ -34,31 +35,14 @@ window.onload = function () {
   var collisionHandler = new CollisionHandler()
 
   var animal = new Animal(sharedDimensions, worldDimensions)
-  var farmerOptions = {
-    objectDimensions: sharedDimensions, 
-    worldDimensions: worldDimensions, 
+
+  var farmerGenerator = new FarmerGenerator();
+  var farmers = farmerGenerator.generate({
+    objectDimensions: sharedDimensions,
+    worldDimensions: worldDimensions,
     collisionHandler: collisionHandler,
-    controls: {
-      up: 38,
-      down: 40,
-      left: 37,
-      right: 39 //87 w 65 a 68 d S 83
-    },
-    x: worldDimensions.width / 2,
-    y: worldDimensions.height / 2
-  }
+  })
 
-  var farmer = new Farmer(farmerOptions)
-  farmerOptions.controls = {
-      up: 87,
-      down: 83,
-      left: 65,
-      right: 68 //87 w 65 a 68 d S 83
-    }
-  farmerOptions.x = (worldDimensions.width / 2) - sharedDimensions.width
-  var farmer2 = new Farmer(farmerOptions)
-
-  var farmers = [farmer,farmer2]
   var obstacleGenerator = new ObstacleGenerator()
   var obstacles = obstacleGenerator.generate()
 

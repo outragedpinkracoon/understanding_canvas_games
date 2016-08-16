@@ -10,3 +10,4 @@
 - Add coords to player
 - Allow second farmer to catch chickens
 - Show second farmer score
+- Fix the farmerGenerator to make it more dynamic
