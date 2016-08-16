@@ -5,6 +5,7 @@ var Animal = function(objectDimensions, worldDimensions) {
   this.setPosition()
   this.isHidden = false
   this.dimensions = objectDimensions
+  this.captureValue = 1;
 }
 
 Animal.prototype = {

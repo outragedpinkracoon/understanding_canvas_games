@@ -21,7 +21,7 @@ Renderer.prototype = {
   },
   drawMonsterCaughtCount: function(){
     displayTag = document.getElementById("score")
-    displayTag.innerText = this.world.stats.total
+    displayTag.innerText = this.world.farmers[0].score
   },
   drawImages: function(){
     this.ctx.drawImage(this.images.background, 0, 0)

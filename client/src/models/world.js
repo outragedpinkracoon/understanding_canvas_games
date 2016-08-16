@@ -53,6 +53,7 @@ World.prototype = {
       if(!hasCollided) continue
 
       this.stats.animalCaught()
+      this.farmers[0].catchAnimal(animal)
       animal.isHidden = true
     }
   },

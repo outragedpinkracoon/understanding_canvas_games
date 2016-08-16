@@ -4,6 +4,7 @@ var Farmer = function(objectDimensions,worldDimensions) {
   this.setPosition()
   this.dimensions = objectDimensions
   this.originalSpeed = this.speed
+  this.score = 0
 }
 
 Farmer.prototype = {
@@ -22,6 +23,9 @@ Farmer.prototype = {
   setPosition: function(){
     this.x = this.worldDimensions.width / 2
     this.y = this.worldDimensions.height / 2
+  },
+  catchAnimal: function(animal){
+    this.score += animal.captureValue
   }
 }
 
