@@ -19,14 +19,14 @@ FarmerGenerator.prototype = {
 
     var farmer = new Farmer(farmerOptions)
     farmerOptions.controls = {
-        up: 87,
-        down: 83,
-        left: 65,
-        right: 68 //87 w 65 a 68 d S 83
+      up: 87,
+      down: 83,
+      left: 65,
+      right: 68 //87 w 65 a 68 d S 83
     }
     farmerOptions.x = (options.worldDimensions.width / 2) - options.objectDimensions.width
     var farmer2 = new Farmer(farmerOptions)
     return [farmer, farmer2]
-    }
+  }
 }
 module.exports = FarmerGenerator
