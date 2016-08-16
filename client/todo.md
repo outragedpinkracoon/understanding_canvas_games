@@ -6,4 +6,5 @@
 - Stop players moving through trees
 - Add timer for rounds
 - Make player drown if in the pond too long
-- Add special chickens worth more points
+- Add special chickens/animals worth more points
+- Add a boss???
