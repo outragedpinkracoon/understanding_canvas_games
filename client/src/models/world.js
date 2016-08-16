@@ -48,31 +48,34 @@ World.prototype = {  //73 is i 74 is j 76 is l
     this.checkObjectCollisions()
   },
   checkAnimalCollisions: function () {
-    for (animal of this.animals) {
-      if (animal.isHidden) continue
+    for (var farmer of this.farmers) {
+      for (animal of this.animals) {
+        if (animal.isHidden) continue
 
-      var hasCollided = this.checkCollision(this.farmers[0], animal)
-      if (!hasCollided) continue
+        var hasCollided = this.checkCollision(farmer, animal)
+        if (!hasCollided) continue
 
-      this.stats.animalCaught()
-      this.farmers[0].catchAnimal(animal)
-      animal.isHidden = true
+        this.stats.animalCaught()
+        farmer.catchAnimal(animal)
+        animal.isHidden = true
+      }
     }
+
   },
   checkObjectCollisions: function () {
 
-    for(var farmer of this.farmers){
+    for (var farmer of this.farmers) {
       var collision = null
-       for (var obstacle of this.obstacles) {
-          var hasCollided = this.checkCollision(farmer, obstacle)
-          if (hasCollided) collision = obstacle
-       }
-       if (collision) {
-          farmer.speed = collision.movementModifier
-        }
-        else {
-          farmer.speed = farmer.originalSpeed
-        }
+      for (var obstacle of this.obstacles) {
+        var hasCollided = this.checkCollision(farmer, obstacle)
+        if (hasCollided) collision = obstacle
+      }
+      if (collision) {
+        farmer.speed = collision.movementModifier
+      }
+      else {
+        farmer.speed = farmer.originalSpeed
+      }
     }
 
   },

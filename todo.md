@@ -1,8 +1,8 @@
-- Stop players going out of bounds
+- Stop players going out of bounds DONE
 - Slow players moving through grass DONE
 - Slow players moving through trees DONE
 - Add a fox (player 2)
-- Add controls for play on a single screen
+- Add controls for play on a single screen DONE
 - Show how many chickens each player has caught
 - Add timer for rounds
 - Add special chickens/animals worth more points
