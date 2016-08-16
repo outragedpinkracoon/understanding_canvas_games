@@ -8,6 +8,7 @@ var Farmer = function(options) {
   this.controls = options.controls
   this.x = options.x
   this.y = options.y
+  this.name = options.name
 }
 
 Farmer.prototype = {

@@ -60,17 +60,21 @@ World.prototype = {  //73 is i 74 is j 76 is l
     }
   },
   checkObjectCollisions: function () {
-    var collision
-    for (var obstacle of this.obstacles) {
-      var hasCollided = this.checkCollision(this.farmers[0], obstacle)
-      if (hasCollided) collision = obstacle
+
+    for(var farmer of this.farmers){
+      var collision = null
+       for (var obstacle of this.obstacles) {
+          var hasCollided = this.checkCollision(farmer, obstacle)
+          if (hasCollided) collision = obstacle
+       }
+       if (collision) {
+          farmer.speed = collision.movementModifier
+        }
+        else {
+          farmer.speed = farmer.originalSpeed
+        }
     }
-    if (collision) {
-      this.farmers[0].speed = collision.movementModifier
-    }
-    else {
-      this.farmers[0].speed = this.farmers[0].originalSpeed
-    }
+
   },
   checkCollision: function (object1, object2) {
     return this.collisionHandler.check(object1, object2)
