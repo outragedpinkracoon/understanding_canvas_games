@@ -8,8 +8,9 @@ ObstacleFactory.prototype = {
   create: function(options){
 
     var optionsType = {}    
-    optionsType[ObstacleKind.POND] = obstacleOptions.pond
+    optionsType[ObstacleKind.ICE] = obstacleOptions.ice
     optionsType[ObstacleKind.GRASS] = obstacleOptions.grass
+    optionsType[ObstacleKind.TREE] = obstacleOptions.tree
     
     var obstacle = new Obstacle(optionsType[options.kind]);
 

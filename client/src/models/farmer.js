@@ -1,5 +1,5 @@
 var Farmer = function(objectDimensions,worldDimensions) {
-  this.speed = 4
+  this.speed = 5
   this.worldDimensions = worldDimensions
   this.setPosition()
   this.dimensions = objectDimensions

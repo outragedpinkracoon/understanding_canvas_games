@@ -58,12 +58,13 @@ window.onload = function () {
 }
 
 function generateObstacles(){
+
   var factory = new ObstacleFactory()
 
   var pondOptions = {
     coords: new Coords({x: 328, y:60}),
     dimensions: new Dimensions({width:125,height:90}),
-    kind: ObstacleKind.POND,
+    kind: ObstacleKind.ICE,
   }
 
   var grassTopLeftOptions = {
@@ -84,19 +85,46 @@ function generateObstacles(){
     kind: ObstacleKind.GRASS,
   }
 
-
   var grassRightBorderOptions = {
     coords: new Coords({ x: 490, y: 42 }),
     dimensions: new Dimensions({ width: 26, height: 399 }),
     kind: ObstacleKind.GRASS,
   }
 
-  var pond = factory.create(pondOptions)
-  var grassTopLeft = factory.create(grassTopLeftOptions)
-  var grassLowerRight = factory.create(grassBottomRightOptions)
-  var grassLeftBorder = factory.create(grassLeftBorderOptions)
-  var grassRightBorder = factory.create(grassRightBorderOptions)
-  return [pond, grassTopLeft, grassLowerRight, grassLeftBorder, grassRightBorder]
+  var treeRightBunchUpperOptions = {
+    coords: new Coords({ x: 305, y: 204 }),
+    dimensions: new Dimensions({ width: 99, height: 42 }),
+    kind: ObstacleKind.TREE,
+  }
+
+  var treeRightBunchLowerOptions = {
+    coords: new Coords({ x: 323, y: 245 }),
+    dimensions: new Dimensions({ width: 62, height: 27 }),
+    kind: ObstacleKind.TREE,
+  }
+
+  var treeLeftBunchUpperOptions = {
+    coords: new Coords({ x: 101, y: 341 }),
+    dimensions: new Dimensions({ width: 64, height: 44 }),
+    kind: ObstacleKind.TREE,
+  }
+
+  var treeLeftBunchLowerOptions = {
+    coords: new Coords({ x: 115, y: 383 }),
+    dimensions: new Dimensions({ width: 33, height: 27 }),
+    kind: ObstacleKind.TREE,
+  }
+
+  var options = [pondOptions, grassTopLeftOptions, grassBottomRightOptions, grassLeftBorderOptions,
+  grassRightBorderOptions, treeRightBunchUpperOptions, treeRightBunchLowerOptions, treeLeftBunchUpperOptions,
+  treeLeftBunchLowerOptions]
+
+  var obstacles = []
+  for(var option of options){
+    obstacles.push(factory.create(option))
+  }
+
+  return obstacles;
 }
 
 
