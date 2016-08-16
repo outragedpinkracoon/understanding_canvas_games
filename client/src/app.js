@@ -3,6 +3,7 @@ var Animal = require('./models/animal')
 var Images = require('./models/images')
 var Obstacle = require('./models/obstacles/obstacle')
 var ObstacleKind = require('./models/obstacles/obstacleKind')
+var ObstacleFactory = require('./models/obstacles/obstacleFactory')
 var KeyboardEvents = require('./models/keyboardEvents')
 var Display = require('./models/display')
 var Dimensions = require('./models/dimensions')
@@ -47,16 +48,18 @@ window.onload = function () {
 }
 
 function generateObstacles(){
+  var factory = new ObstacleFactory()
 
   var pondOptions = {
-    xPos: 328,
-    yPos: 60,
+    coords: {
+      xPos: 328,
+      yPos: 60
+    },
     dimensions: new Dimensions(125,90),
     kind: ObstacleKind.POND,
-    movementModifier: 2
   }
 
-  var pond = new Obstacle(pondOptions)
+  var pond = factory.create(pondOptions)
   return [pond]
 }
 

@@ -1,4 +1,3 @@
-var OBSTACLEKIND = require('./obstacleKind')
 var Obstacle = function(options){
   this.x = options.xPos
   this.y = options.yPos
