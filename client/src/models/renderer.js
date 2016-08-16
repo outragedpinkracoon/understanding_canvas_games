@@ -20,8 +20,11 @@ Renderer.prototype = {
     }.bind(this))
   },
   drawMonsterCaughtCount: function(){
-    displayTag = document.getElementById("score")
+    //oh good grief fix this mess
+    displayTag = document.getElementById("player1-score")
     displayTag.innerText = this.world.farmers[0].score
+    displayTag = document.getElementById("player2-score")
+    displayTag.innerText = this.world.farmers[1].score
   },
   drawImages: function(){
     this.ctx.drawImage(this.images.background, 0, 0)
