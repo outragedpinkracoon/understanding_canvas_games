@@ -3,7 +3,7 @@ var ObstacleKind = require('./obstacleKind')
 var obstacleOptions = {
   grass: {
     kind: ObstacleKind.GRASS,
-    movementModifier: 3
+    movementModifier: 2
   },
   ice: {
     kind: ObstacleKind.ICE,
