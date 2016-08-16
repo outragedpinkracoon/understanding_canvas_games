@@ -1,6 +1,6 @@
-var Dimensions = function(width, height){
-  this.width = width
-  this.height = height
+var Dimensions = function(options){
+  this.width = options.width
+  this.height = options.height
 }
 
 module.exports = Dimensions

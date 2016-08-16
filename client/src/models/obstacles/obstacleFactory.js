@@ -15,8 +15,8 @@ ObstacleFactory.prototype = {
     return obstacle
   },
   addCommonProperties: function(obstacle, options){
-    obstacle.x = options.coords.xPos
-    obstacle.y = options.coords.yPos
+    obstacle.x = options.coords.x
+    obstacle.y = options.coords.y
     obstacle.dimensions = options.dimensions
     return obstacle
   },

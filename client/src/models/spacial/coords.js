@@ -1,5 +1,6 @@
-var Coords = function() {
-
+var Coords = function(options) {
+    this.x = options.x
+    this.y = options.y
 }
 
 module.exports = Coords

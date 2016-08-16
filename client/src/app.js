@@ -7,6 +7,7 @@ var ObstacleFactory = require('./models/obstacles/obstacleFactory')
 var KeyboardEvents = require('./models/keyboardEvents')
 var Display = require('./models/display')
 var Dimensions = require('./models/spacial/dimensions')
+var Coords = require('./models/spacial/coords')
 var WorldStats = require('./models/worldStats')
 var Renderer = require('./models/renderer')
 var World = require('./models/world')
@@ -21,8 +22,17 @@ window.onload = function () {
   var ctx = display.ctx
   var images = new Images()
 
-  var worldDimensions = new Dimensions(canvas.width,canvas.height)
-  var sharedDimensions = new Dimensions(32,32);
+  var worldDimensionsOptions = {
+    width: (function(){
+      return canvas.width
+    })(),
+    height: (function(){
+      return canvas.height
+    })()
+  }
+
+  var worldDimensions = new Dimensions(worldDimensionsOptions)
+  var sharedDimensions = new Dimensions({width: 32,height:32})
 
   var animal = new Animal(sharedDimensions, worldDimensions)
   var farmer = new Farmer(sharedDimensions, worldDimensions)
@@ -51,11 +61,8 @@ function generateObstacles(){
   var factory = new ObstacleFactory()
 
   var pondOptions = {
-    coords: {
-      xPos: 328,
-      yPos: 60
-    },
-    dimensions: new Dimensions(125,90),
+    coords: new Coords({x: 328, y:60}),
+    dimensions: new Dimensions({width:125,height:90}),
     kind: ObstacleKind.POND,
   }
 
