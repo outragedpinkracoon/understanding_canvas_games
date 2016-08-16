@@ -14,6 +14,7 @@ var World = function (options) {
 
 World.prototype = { 
   update: function () {
+    //refactor this shit
     for (var farmer of this.farmers) {
       if (farmer.controls.up in this.keyPressTracker) {
         farmer.moveUp()
