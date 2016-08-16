@@ -22,3 +22,8 @@ h1, p {
   padding: 5px;
   margin: 0px;
 }
+
+#winner-info {
+  font-size: 1.5em;
+  color: seagreen
+}

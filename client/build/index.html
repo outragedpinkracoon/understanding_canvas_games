@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Crazy Chicken Catcher</title>
   <script src='bundle.js'></script>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
   <main class="flex flex-center flex-column">
     <h1 class="text-center">Crazy Chicken Catcher</h1>
     <p>Player 1:
-      <span id="player1-score">0</span>
-      -- Chickens Caught --
-      Player 2:  
+      <span id="player1-score">0</span> -- Chickens Caught -- Player 2:
       <span id="player2-score">0</span>
-      <p>
+    </p>
     <canvas width="512" height="480"></canvas>
+     <p id="winner-info" style="display:none">The winner is Player <span id="winner-id"></span></p>
   </main>
 </body>
+
 </html>

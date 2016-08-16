@@ -8,9 +8,11 @@ var World = function (options) {
   this.animalDimensions = options.animals[0].dimensions
   this.stats = options.worldStats
   this.obstacles = options.obstacles
+  //todo pass in
+  this.winningScore = 10
 }
 
-World.prototype = {  //73 is i 74 is j 76 is l
+World.prototype = { 
   update: function () {
     for (var farmer of this.farmers) {
       if (farmer.controls.up in this.keyPressTracker) {
@@ -30,6 +32,11 @@ World.prototype = {  //73 is i 74 is j 76 is l
     this.checkCollisons()
     this.checkForReset()
 
+  },
+  winner: function(){
+    for(var farmer of this.farmers){
+      if(farmer.score == this.winningScore) return farmer
+    }
   },
   checkForReset: function () {
     if (!this.stats.allAnimalsCaught()) return

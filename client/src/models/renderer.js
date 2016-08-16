@@ -8,20 +8,43 @@ var Renderer = function(display, world, images){
 
 Renderer.prototype = {
   draw: function() {
+    var winner = this.world.winner()
+    if(winner) {
+      this.drawWinnerInfo(winner)
+      return
+    }
     this.clearCanvas()
 
     this.world.update()
     this.drawImages()
 
     this.drawMonsterCaughtCount()
+    this.drawPlayerLabels()
 
     requestAnimationFrame(function(){
       this.draw()
     }.bind(this))
   },
+  drawWinnerInfo: function(winner){
+    var displayTag = document.getElementById("winner-info")
+    displayTag.style.display = "block"
+    displayTag = document.getElementById("winner-id")
+    displayTag.innerText = winner.name
+  },
+  drawPlayerLabels: function(){
+    var counter = 1;
+    for(var farmer of this.world.farmers){
+      this.ctx.font="15px Georgia"
+      var x = farmer.x + (farmer.dimensions.width * 0.35) 
+      var y = farmer.y + (farmer.dimensions.height * 0.8)
+      this.ctx.fillText(counter.toString(),x,y)
+      counter++
+    }
+    
+  },
   drawMonsterCaughtCount: function(){
     //oh good grief fix this mess
-    displayTag = document.getElementById("player1-score")
+    var displayTag = document.getElementById("player1-score")
     displayTag.innerText = this.world.farmers[0].score
     displayTag = document.getElementById("player2-score")
     displayTag.innerText = this.world.farmers[1].score

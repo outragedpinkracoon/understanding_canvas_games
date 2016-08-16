@@ -12,3 +12,4 @@
 - Show second farmer score
 - Fix the farmerGenerator to make it more dynamic
 - Tidy up score render urgh!
+- Pass in winning score to world
