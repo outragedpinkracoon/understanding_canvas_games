@@ -7,3 +7,6 @@
 - Add timer for rounds
 - Add special chickens/animals worth more points
 - Add a boss???
+- Add coords to player
+- Allow second farmer to catch chickens
+- Show second farmer score

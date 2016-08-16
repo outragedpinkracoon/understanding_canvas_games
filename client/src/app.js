@@ -43,7 +43,9 @@ window.onload = function () {
       down: 40,
       left: 37,
       right: 39 //87 w 65 a 68 d S 83
-    }
+    },
+    x: worldDimensions.width / 2,
+    y: worldDimensions.height / 2
   }
 
   var farmer = new Farmer(farmerOptions)
@@ -53,6 +55,7 @@ window.onload = function () {
       left: 65,
       right: 68 //87 w 65 a 68 d S 83
     }
+  farmerOptions.x = (worldDimensions.width / 2) - sharedDimensions.width
   var farmer2 = new Farmer(farmerOptions)
 
   var farmers = [farmer,farmer2]

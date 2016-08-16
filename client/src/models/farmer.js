@@ -1,12 +1,13 @@
 var Farmer = function(options) {
   this.speed = 5
   this.worldDimensions = options.worldDimensions
-  this.setPosition()
   this.dimensions = options.objectDimensions
   this.originalSpeed = this.speed
   this.score = 0
   this.collisionHandler = options.collisionHandler
   this.controls = options.controls
+  this.x = options.x
+  this.y = options.y
 }
 
 Farmer.prototype = {
@@ -25,10 +26,6 @@ Farmer.prototype = {
   moveRight: function(){
     if(this.collisionHandler.atRight(this)) return
     this.x += this.speed
-  },
-  setPosition: function(){
-    this.x = this.worldDimensions.width / 2
-    this.y = this.worldDimensions.height / 2
   },
   catchAnimal: function(animal){
     this.score += animal.captureValue
