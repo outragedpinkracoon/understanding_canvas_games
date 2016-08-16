@@ -1,9 +1,9 @@
-- Add a fox (player 2)
-- Add controls for play on a single screen
-- Show how many chickens each player has caught
 - Stop players going out of bounds
 - Stop players moving through grass
 - Stop players moving through trees
+- Add a fox (player 2)
+- Add controls for play on a single screen
+- Show how many chickens each player has caught
 - Add timer for rounds
 - Make player drown if in the pond too long
 - Add special chickens/animals worth more points

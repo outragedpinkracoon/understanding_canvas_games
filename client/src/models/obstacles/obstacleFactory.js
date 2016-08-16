@@ -1,16 +1,18 @@
 var ObstacleKind = require('./obstacleKind')
 var Obstacle = require('./obstacle')
+var obstacleOptions = require('./obstacleOptions')
 
 var ObstacleFactory = function(){}
 
 ObstacleFactory.prototype = {
   create: function(options){
-    var obstacle
 
-    switch(options.kind) {
-      case ObstacleKind.POND:
-        obstacle = this.makePond()
-    }
+    var optionsType = {}    
+    optionsType[ObstacleKind.POND] = obstacleOptions.pond
+    optionsType[ObstacleKind.GRASS] = obstacleOptions.grass
+    
+    var obstacle = new Obstacle(optionsType[options.kind]);
+
     this.addCommonProperties(obstacle, options)
     return obstacle
   },
@@ -18,15 +20,6 @@ ObstacleFactory.prototype = {
     obstacle.x = options.coords.x
     obstacle.y = options.coords.y
     obstacle.dimensions = options.dimensions
-    return obstacle
-  },
-  makePond: function (obstacle) {
-    var pondOptions = {
-      kind: ObstacleKind.POND,
-      movementModifier: 2
-    }
-
-    var obstacle = new Obstacle(pondOptions)
     return obstacle
   }
 }
