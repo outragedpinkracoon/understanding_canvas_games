@@ -12,4 +12,9 @@
 - Show second farmer score
 - Fix the farmerGenerator to make it more dynamic
 - Tidy up score render urgh!
-- Pass in winning score to world
+- Pass in winning score to world DONE
+- Make farmers throw eggs at the other player
+- Make a sink hole!
+- Make bad chickens that cost you points
+- Chickens lay eggs and players 
+- Goats that chase you! You lose your eggs when they hit you

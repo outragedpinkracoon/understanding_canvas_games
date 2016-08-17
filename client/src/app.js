@@ -56,7 +56,8 @@ window.onload = function () {
     dimensions: worldDimensions,
     collisionHandler: collisionHandler,
     worldStats: new WorldStats(),
-    obstacles: obstacles
+    obstacles: obstacles,
+    winningScore: 10
   }
 
   var world = new World(worldOptions)

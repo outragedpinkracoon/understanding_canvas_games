@@ -9,7 +9,7 @@ var World = function (options) {
   this.stats = options.worldStats
   this.obstacles = options.obstacles
   //todo pass in
-  this.winningScore = 10
+  this.winningScore = options.winningScore
 }
 
 World.prototype = { 
@@ -35,9 +35,13 @@ World.prototype = {
 
   },
   winner: function(){
+    var index = 0
     for(var farmer of this.farmers){
       if(farmer.score == this.winningScore) return farmer
     }
+    //sad
+    var filtered = this.farmers.filter(function(farmer) { return farmer.isDead == false });
+    if(filtered.length == 1) return filtered[0]
   },
   checkForReset: function () {
     if (!this.stats.allAnimalsCaught()) return
@@ -82,7 +86,13 @@ World.prototype = {
         if (hasCollided) collision = obstacle
       }
       if (collision) {
-        farmer.speed = collision.movementModifier
+        if(collision.killsPlayer){
+          farmer.isDead = true
+          farmer.isHidden = true
+        }
+        else {
+          farmer.speed = collision.movementModifier
+        }
       }
       else {
         farmer.speed = farmer.originalSpeed

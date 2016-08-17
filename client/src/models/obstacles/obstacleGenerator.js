@@ -65,9 +65,20 @@ ObstacleGenerator.prototype = {
             kind: ObstacleKind.TREE,
         }
 
+        var topLeftLavaOptions = {
+            coords: new Coords({ x: 29, y: 44 }),
+            dimensions: new Dimensions({ width: 31, height: 34 }),
+            kind: ObstacleKind.LAVA,
+        }
+        var middleLavaOptions = {
+            coords: new Coords({ x: 336, y: 276 }),
+            dimensions: new Dimensions({ width: 31, height: 34 }),
+            kind: ObstacleKind.LAVA,
+        }
+
         var options = [pondOptions, grassTopLeftOptions, grassBottomRightOptions, grassLeftBorderOptions,
             grassRightBorderOptions, treeRightBunchUpperOptions, treeRightBunchLowerOptions, treeLeftBunchUpperOptions,
-            treeLeftBunchLowerOptions]
+            treeLeftBunchLowerOptions, topLeftLavaOptions, middleLavaOptions]
 
         var obstacles = []
         for (var option of options) {

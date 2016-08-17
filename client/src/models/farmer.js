@@ -8,6 +8,7 @@ var Farmer = function(options) {
   this.controls = options.controls
   this.coords = options.coords
   this.name = options.name
+  this.isDead = false
 }
 
 Farmer.prototype = {

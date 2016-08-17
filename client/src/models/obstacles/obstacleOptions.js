@@ -12,6 +12,11 @@ var obstacleOptions = {
   tree: {
     kind: ObstacleKind.TREE,
     movementModifier: 1
+  },
+  lava: {
+    kind: ObstacleKind.LAVA,
+    movementModifier: -1,
+    killsPlayer: true
   }
 }
 

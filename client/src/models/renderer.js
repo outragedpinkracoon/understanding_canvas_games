@@ -51,8 +51,11 @@ Renderer.prototype = {
   },
   drawImages: function(){
     this.ctx.drawImage(this.images.background, 0, 0)
-    this.ctx.drawImage(this.images.farmer, this.world.farmers[0].coords.x, this.world.farmers[0].coords.y)
-    this.ctx.drawImage(this.images.farmer, this.world.farmers[1].coords.x, this.world.farmers[1].coords.y)
+    for(var farmer of this.world.farmers){
+      if(!farmer.isHidden) {
+      this.ctx.drawImage(this.images.farmer, farmer.coords.x, farmer.coords.y)
+      }
+    }
     for(animal of this.world.animals){
       if(!animal.isHidden){
         this.ctx.drawImage(this.images.animal, animal.coords.x, animal.coords.y)

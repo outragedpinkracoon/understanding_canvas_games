@@ -11,6 +11,7 @@ ObstacleFactory.prototype = {
     optionsType[ObstacleKind.ICE] = obstacleOptions.ice
     optionsType[ObstacleKind.GRASS] = obstacleOptions.grass
     optionsType[ObstacleKind.TREE] = obstacleOptions.tree
+    optionsType[ObstacleKind.LAVA] = obstacleOptions.lava
     
     var obstacle = new Obstacle(optionsType[options.kind]);
 
