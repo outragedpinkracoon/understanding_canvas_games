@@ -12,28 +12,28 @@ CollisionHandler.prototype = {
     return result
   },
   checkOne: function(object1, object2){
-    return object1.x < object2.x + object2.dimensions.width
+    return object1.coords.x < object2.coords.x + object2.dimensions.width
   },
   checkTwo: function(object1, object2){
-    return object1.x + object1.dimensions.width > object2.x
+    return object1.coords.x + object1.dimensions.width > object2.coords.x
   },
   checkThree: function(object1, object2){
-    return object1.y < object2.y + object2.dimensions.height
+    return object1.coords.y < object2.coords.y + object2.dimensions.height
   },
   checkFour: function(object1, object2){
-    return object1.dimensions.height + object1.y > object2.y
+    return object1.dimensions.height + object1.coords.y > object2.coords.y
   },
   atTop: function(collider){
-    return collider.y - collider.dimensions.height <= 0
+    return collider.coords.y - collider.dimensions.height <= 0
   },
   atBottom: function(collider){
-    return collider.y + (collider.dimensions.height * 2) >= collider.worldDimensions.height
+    return collider.coords.y + (collider.dimensions.height * 2) >= collider.worldDimensions.height
   },
   atLeft: function(collider){
-    return collider.x <= 0
+    return collider.coords.x <= 0
   },
   atRight: function(collider){
-    return (collider.x + collider.dimensions.width) >= collider.worldDimensions.width
+    return (collider.coords.x + collider.dimensions.width) >= collider.worldDimensions.width
   }
 }
 

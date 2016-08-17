@@ -1,4 +1,5 @@
 var Farmer = require('./farmer')
+var Coords = require('./spacial/coords')
 var FarmerGenerator = function () { }
 
 FarmerGenerator.prototype = {
@@ -14,8 +15,10 @@ FarmerGenerator.prototype = {
         left: 37,
         right: 39 //87 w 65 a 68 d S 83
       },
-      x: options.worldDimensions.width / 2,
-      y: options.worldDimensions.height / 2,
+      coords: new Coords({
+        x: options.worldDimensions.width / 2,
+        y: options.worldDimensions.height / 2,
+      }),
       name: "1"
     }
 
@@ -31,8 +34,10 @@ FarmerGenerator.prototype = {
         left: 65,
         right: 68 //87 w 65 a 68 d S 83
       },
-      x: (options.worldDimensions.width / 2) -  options.objectDimensions.width,
-      y: options.worldDimensions.height / 2,
+      coords: new Coords({
+        x: (options.worldDimensions.width / 2) -  options.objectDimensions.width,
+        y: options.worldDimensions.height / 2,
+      }),
       name: "2"
     }
 

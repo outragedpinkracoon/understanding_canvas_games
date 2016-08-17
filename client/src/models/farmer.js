@@ -6,27 +6,26 @@ var Farmer = function(options) {
   this.score = 0
   this.collisionHandler = options.collisionHandler
   this.controls = options.controls
-  this.x = options.x
-  this.y = options.y
+  this.coords = options.coords
   this.name = options.name
 }
 
 Farmer.prototype = {
   moveUp: function(){
     if(this.collisionHandler.atTop(this)) return
-    this.y -= this.speed
+    this.coords.y -= this.speed
   },
   moveDown: function(){
     if(this.collisionHandler.atBottom(this)) return
-    this.y += this.speed
+    this.coords.y += this.speed
   },
   moveLeft: function(){
     if(this.collisionHandler.atLeft(this)) return
-    this.x -= this.speed
+    this.coords.x -= this.speed
   },
   moveRight: function(){
     if(this.collisionHandler.atRight(this)) return
-    this.x += this.speed
+    this.coords.x += this.speed
   },
   catchAnimal: function(animal){
     this.score += animal.captureValue

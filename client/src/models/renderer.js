@@ -35,8 +35,8 @@ Renderer.prototype = {
     var counter = 1;
     for(var farmer of this.world.farmers){
       this.ctx.font="15px Georgia"
-      var x = farmer.x + (farmer.dimensions.width * 0.35) 
-      var y = farmer.y + (farmer.dimensions.height * 0.8)
+      var x = farmer.coords.x + (farmer.dimensions.width * 0.35) 
+      var y = farmer.coords.y + (farmer.dimensions.height * 0.8)
       this.ctx.fillText(counter.toString(),x,y)
       counter++
     }
@@ -51,11 +51,11 @@ Renderer.prototype = {
   },
   drawImages: function(){
     this.ctx.drawImage(this.images.background, 0, 0)
-    this.ctx.drawImage(this.images.farmer, this.world.farmers[0].x, this.world.farmers[0].y)
-    this.ctx.drawImage(this.images.farmer, this.world.farmers[1].x, this.world.farmers[1].y)
+    this.ctx.drawImage(this.images.farmer, this.world.farmers[0].coords.x, this.world.farmers[0].coords.y)
+    this.ctx.drawImage(this.images.farmer, this.world.farmers[1].coords.x, this.world.farmers[1].coords.y)
     for(animal of this.world.animals){
       if(!animal.isHidden){
-        this.ctx.drawImage(this.images.animal, animal.x, animal.y)
+        this.ctx.drawImage(this.images.animal, animal.coords.x, animal.coords.y)
       }
     } 
   },

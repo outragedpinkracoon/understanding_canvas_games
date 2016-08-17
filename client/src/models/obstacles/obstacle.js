@@ -1,6 +1,5 @@
 var Obstacle = function(options){
-  this.x = options.x
-  this.y = options.y
+  this.coords = options.coords
   this.movementModifier = options.movementModifier
   this.kind = options.kind
   this.dimensions = options.dimensions

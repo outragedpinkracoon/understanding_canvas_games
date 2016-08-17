@@ -34,7 +34,10 @@ window.onload = function () {
 
   var collisionHandler = new CollisionHandler()
 
-  var animal = new Animal(sharedDimensions, worldDimensions)
+  var animal = new Animal({
+    objectDimensions: sharedDimensions, 
+    worldDimensions:worldDimensions
+  })
 
   var farmerGenerator = new FarmerGenerator();
   var farmers = farmerGenerator.generate({

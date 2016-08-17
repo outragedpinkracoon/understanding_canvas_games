@@ -47,7 +47,10 @@ World.prototype = {
   },
   repopulateAnimals: function () {
     for (var i = 0; i < this.stats.animalsNeeded; i++) {
-      var newAnimal = new Animal(this.animalDimensions, this.dimensions)
+      var newAnimal = new Animal({
+        objectDimensions: this.animalDimensions, 
+        worldDimensions: this.dimensions
+      })
       this.animals.push(newAnimal)
     }
   },
