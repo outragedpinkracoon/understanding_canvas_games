@@ -2,6 +2,7 @@ var Images = function(){
   this.background = this.addImage("images/background.png")
   this.farmer = this.addImage("images/farmer.png")
   this.animal = this.addImage("images/chicken_left.png")
+  this.grave = this.addImage("images/grave.png")
 }
 
 Images.prototype = {

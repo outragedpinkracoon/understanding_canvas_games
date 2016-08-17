@@ -34,6 +34,7 @@ Renderer.prototype = {
   drawPlayerLabels: function(){
     var counter = 1;
     for(var farmer of this.world.farmers){
+      if(farmer.isDead) continue
       this.ctx.font="15px Georgia"
       var x = farmer.coords.x + (farmer.dimensions.width * 0.35) 
       var y = farmer.coords.y + (farmer.dimensions.height * 0.8)
@@ -52,8 +53,11 @@ Renderer.prototype = {
   drawImages: function(){
     this.ctx.drawImage(this.images.background, 0, 0)
     for(var farmer of this.world.farmers){
-      if(!farmer.isHidden) {
-      this.ctx.drawImage(this.images.farmer, farmer.coords.x, farmer.coords.y)
+      if(!farmer.isHidden && !farmer.isDead) {
+        this.ctx.drawImage(this.images.farmer, farmer.coords.x, farmer.coords.y)
+      }
+      if(farmer.isDead){
+        this.ctx.drawImage(this.images.grave, farmer.coords.x, farmer.coords.y)
       }
     }
     for(animal of this.world.animals){
